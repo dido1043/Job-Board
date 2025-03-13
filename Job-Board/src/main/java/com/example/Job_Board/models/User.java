@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private String passwordHash;
 
     @Column(nullable = false, length = 20)
-    private String role; // 'JOB_SEEKER' or 'RECRUITER'
+    private String role = "JOB_SEEKER"; // 'JOB_SEEKER' or 'RECRUITER'
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -49,7 +49,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return this.passwordHash;
     }
 
     public String getUsername() {
