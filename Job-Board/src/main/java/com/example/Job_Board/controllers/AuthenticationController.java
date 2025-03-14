@@ -41,11 +41,10 @@ public class AuthenticationController {
         User user = authService.authenticate(loginUserDto);
         String jwtToken = jwtService.generateToken(user);
 
-        System.out.println(jwtToken);
-
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
+
         return  ResponseEntity.ok(loginResponse);
     }
 }
