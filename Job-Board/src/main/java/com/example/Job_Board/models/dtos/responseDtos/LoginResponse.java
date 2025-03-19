@@ -1,4 +1,4 @@
-package com.example.Job_Board.dtos.responseDtos;
+package com.example.Job_Board.models.dtos.responseDtos;
 
 public class LoginResponse {
 

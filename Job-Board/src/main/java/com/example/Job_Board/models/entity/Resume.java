@@ -1,4 +1,4 @@
-package com.example.Job_Board.models;
+package com.example.Job_Board.models.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

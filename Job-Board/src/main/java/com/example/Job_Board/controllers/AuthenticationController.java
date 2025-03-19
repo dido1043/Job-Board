@@ -1,11 +1,11 @@
 package com.example.Job_Board.controllers;
 
-import com.example.Job_Board.dtos.requestDtos.LoginUserDto;
-import com.example.Job_Board.dtos.requestDtos.RegisterUserDto;
-import com.example.Job_Board.dtos.responseDtos.LoginResponse;
-import com.example.Job_Board.models.User;
-import com.example.Job_Board.services.AuthService;
-import com.example.Job_Board.services.JwtService;
+import com.example.Job_Board.models.dtos.requestDtos.LoginUserDto;
+import com.example.Job_Board.models.dtos.requestDtos.RegisterUserDto;
+import com.example.Job_Board.models.dtos.responseDtos.LoginResponse;
+import com.example.Job_Board.models.entity.User;
+import com.example.Job_Board.services.authImpl.AuthService;
+import com.example.Job_Board.services.authImpl.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
-    @Autowired
-    private final JwtService jwtService;
-    @Autowired
-    private final AuthService authService;
 
+    private final JwtService jwtService;
+    private final AuthService authService;
+    @Autowired
     public AuthenticationController(JwtService jwtService, AuthService authService) {
         this.jwtService = jwtService;
         this.authService = authService;

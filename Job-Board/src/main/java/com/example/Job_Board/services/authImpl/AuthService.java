@@ -1,8 +1,8 @@
-package com.example.Job_Board.services;
+package com.example.Job_Board.services.authImpl;
 
-import com.example.Job_Board.dtos.requestDtos.LoginUserDto;
-import com.example.Job_Board.dtos.requestDtos.RegisterUserDto;
-import com.example.Job_Board.models.User;
+import com.example.Job_Board.models.dtos.requestDtos.LoginUserDto;
+import com.example.Job_Board.models.dtos.requestDtos.RegisterUserDto;
+import com.example.Job_Board.models.entity.User;
 import com.example.Job_Board.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

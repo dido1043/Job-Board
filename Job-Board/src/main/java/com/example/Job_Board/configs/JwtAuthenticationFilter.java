@@ -1,7 +1,7 @@
 package com.example.Job_Board.configs;
 
 //import com.tericcabrel.authapi.services.JwtService;
-import com.example.Job_Board.services.JwtService;
+import com.example.Job_Board.services.authImpl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

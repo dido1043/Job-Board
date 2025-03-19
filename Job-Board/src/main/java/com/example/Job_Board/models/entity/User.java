@@ -1,4 +1,4 @@
-package com.example.Job_Board.models;
+package com.example.Job_Board.models.entity;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +32,17 @@ public class User implements UserDetails {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+    }
+
+    @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<JobPost> jobPosts;
+
+    public List<JobPost> getJobPosts() {
+        return jobPosts;
+    }
+
+    public void setJobPosts(List<JobPost> jobPosts) {
+        this.jobPosts = jobPosts;
     }
 
     public Long getId() {

@@ -1,4 +1,4 @@
-package com.example.Job_Board.models;
+package com.example.Job_Board.models.entity;
 
 import jakarta.persistence.*;
 
@@ -12,8 +12,8 @@ public class JobPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "recruiter_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "recruiterId", nullable = false)
     private User recruiter;
 
     @Column(nullable = false, length = 100)
@@ -28,12 +28,13 @@ public class JobPost {
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
 
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
     }
 
     public Long getId() {

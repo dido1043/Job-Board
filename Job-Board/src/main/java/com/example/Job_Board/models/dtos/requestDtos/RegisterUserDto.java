@@ -1,4 +1,4 @@
-package com.example.Job_Board.dtos.requestDtos;
+package com.example.Job_Board.models.dtos.requestDtos;
 
 public class RegisterUserDto {
     private String username;

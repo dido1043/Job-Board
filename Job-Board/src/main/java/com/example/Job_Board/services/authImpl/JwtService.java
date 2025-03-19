@@ -1,4 +1,4 @@
-package com.example.Job_Board.services;
+package com.example.Job_Board.services.authImpl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
