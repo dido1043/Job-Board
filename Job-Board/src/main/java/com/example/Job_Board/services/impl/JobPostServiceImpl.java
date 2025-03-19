@@ -55,7 +55,6 @@ public class JobPostServiceImpl implements JobPostService {
     public JobPostDto getJobPostById(Long id) {
         return null;
     }
-    // ✅ Fix: Conversion methods between DTO and Entity
     private JobPostDto convertToDTO(JobPost jobPost) {
         JobPostDto jobPostDto = new JobPostDto();
         jobPostDto.setId(jobPost.getId());
@@ -76,9 +75,7 @@ public class JobPostServiceImpl implements JobPostService {
         jobPost.setSalary(jobPostDto.getSalary());
         User recruiter = userRepository.findById(jobPostDto.getRecruiterId())
                 .orElseThrow(() -> new RuntimeException("Recruiter with ID " + jobPostDto.getRecruiterId() + " not found"));
-
         jobPost.setRecruiter(recruiter);
-
         return jobPost;
     }
 }
