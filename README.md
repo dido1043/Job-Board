@@ -18,7 +18,6 @@ RESTful API for job and user management
 
 Backend: Spring Boot, Hibernate (JPA), MySQL
 
-Frontend: (Specify if using React, Angular, etc.)
 
 Database: MySQL
 
