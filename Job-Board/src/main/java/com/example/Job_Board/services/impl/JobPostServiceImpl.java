@@ -34,12 +34,24 @@ public class JobPostServiceImpl implements JobPostService {
 
     @Override
     public JobPostDto updateJobPost(Long id, JobPostDto jobPostDto) {
-        return null;
+
+        JobPost jobPost = jobPostRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid job post"));
+        jobPost.setTitle(jobPostDto.getTitle());
+        jobPost.setDescription(jobPostDto.getDescription());
+        jobPost.setLocation(jobPostDto.getLocation());
+        jobPost.setSalary(jobPostDto.getSalary());
+
+        JobPost updatedJobPost = jobPostRepository.save(jobPost);
+        return convertToDTO(updatedJobPost);
     }
 
     @Override
-    public void deleteJobPost(Long id) {
-
+    public String deleteJobPost(Long id) {
+        JobPost jobPost = jobPostRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid job post"));
+        jobPostRepository.delete(jobPost);
+        return "Deleted successfully";
     }
 
     @Override

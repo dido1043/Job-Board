@@ -1,28 +1,19 @@
 package com.example.Job_Board.controllers;
 
 import com.example.Job_Board.models.dtos.jpDto.JobPostDto;
-import com.example.Job_Board.models.entity.JobPost;
-import com.example.Job_Board.models.entity.User;
-import com.example.Job_Board.repository.JobPostRepository;
-import com.example.Job_Board.repository.UserRepository;
 import com.example.Job_Board.services.JobPostService;
-import com.example.Job_Board.services.impl.JobPostServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/post")
 public class JobPostController {
 
    private final JobPostService jobPostService;
-
 
     @Autowired
     public JobPostController(JobPostService jobPostService) {
@@ -42,5 +33,12 @@ public class JobPostController {
     public ResponseEntity<?> create(@Valid @RequestBody JobPostDto jobPostDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(jobPostService.createJobPost(jobPostDto));
     }
-
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> edit(@PathVariable Long id, @RequestBody JobPostDto jobPostDto){
+        return ResponseEntity.status(HttpStatus.OK).body(jobPostService.updateJobPost(id, jobPostDto));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(jobPostService.deleteJobPost(id));
+    }
 }

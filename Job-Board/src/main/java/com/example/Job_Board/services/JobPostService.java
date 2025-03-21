@@ -7,7 +7,7 @@ import java.util.List;
 public interface JobPostService {
     JobPostDto createJobPost(JobPostDto jobPostDto);
     JobPostDto updateJobPost(Long id, JobPostDto jobPostDto);
-    void deleteJobPost(Long id);
+    String deleteJobPost(Long id);
     List<JobPostDto> getAllJobPosts();
     JobPostDto getJobPostById(Long id);
 }
