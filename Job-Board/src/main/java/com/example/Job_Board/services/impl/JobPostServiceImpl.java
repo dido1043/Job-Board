@@ -53,8 +53,11 @@ public class JobPostServiceImpl implements JobPostService {
 
     @Override
     public JobPostDto getJobPostById(Long id) {
-        return null;
+        JobPost jobPost = jobPostRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid job post"));
+        return convertToDTO(jobPost);
     }
+
     private JobPostDto convertToDTO(JobPost jobPost) {
         JobPostDto jobPostDto = new JobPostDto();
         jobPostDto.setId(jobPost.getId());

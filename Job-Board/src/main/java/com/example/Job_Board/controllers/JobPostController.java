@@ -34,6 +34,10 @@ public class JobPostController {
         List<JobPostDto> jobPosts = jobPostService.getAllJobPosts();
         return ResponseEntity.status(HttpStatus.OK).body(jobPosts);
     }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(jobPostService.getJobPostById(id));
+    }
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody JobPostDto jobPostDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(jobPostService.createJobPost(jobPostDto));
