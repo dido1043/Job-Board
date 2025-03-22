@@ -21,6 +21,10 @@ public class Application {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime applicationDate;
+    @ManyToOne
+    @JoinColumn(name = "resume_id", nullable = false)
+    private Resume resume; // Relationship with Resume entity
+
 
     @PrePersist
     protected void onCreate() {
@@ -57,5 +61,13 @@ public class Application {
 
     public void setApplicationDate(LocalDateTime applicationDate) {
         this.applicationDate = applicationDate;
+    }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
     }
 }

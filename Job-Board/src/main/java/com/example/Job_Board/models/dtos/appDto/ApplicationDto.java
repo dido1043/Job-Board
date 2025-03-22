@@ -5,7 +5,7 @@ public class ApplicationDto {
     private Long id;
     private Long jobSeekerId;
     private Long jobPostId;
-
+    private Long resumeId;
     public Long getId() {
         return id;
     }
@@ -28,5 +28,13 @@ public class ApplicationDto {
 
     public void setJobPostId(Long jobPostId) {
         this.jobPostId = jobPostId;
+    }
+
+    public Long getResumeId() {
+        return resumeId;
+    }
+
+    public void setResumeId(Long resumeId) {
+        this.resumeId = resumeId;
     }
 }
