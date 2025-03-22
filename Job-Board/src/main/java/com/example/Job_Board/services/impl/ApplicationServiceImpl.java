@@ -39,7 +39,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public ApplicationDto getApplicationById(Long id) {
-        return null;
+        Application application = applicationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid job application"));
+        return convertToDTO(application);
     }
 
     @Override
