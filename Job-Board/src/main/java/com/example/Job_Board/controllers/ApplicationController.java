@@ -17,7 +17,10 @@ public class ApplicationController {
     public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
     }
-
+    @GetMapping("/seeker/{id}")
+    public ResponseEntity<?> getApplicationByJobSeekerId(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(applicationService.getApplicationsByApplicantId(id));
+    }
     @GetMapping("/job/{id}")
     public ResponseEntity<?> getApplicationByJobPostId(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(applicationService.getApplicationsByJobPostId(id));
