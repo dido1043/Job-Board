@@ -31,6 +31,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
+    public List<ApplicationDto> getAllApplications() {
+        List<Application> applications = applicationRepository.findAll();
+        return applications.stream().map(this::convertToDTO).toList();
+    }
+
+    @Override
     public ApplicationDto createApplication(ApplicationDto applicationDto) {
         Application application = convertToEntity(applicationDto);
         Application savedApplication = applicationRepository.save(application);
@@ -56,14 +62,14 @@ public class ApplicationServiceImpl implements ApplicationService {
         return applicationList.stream().map(this::convertToDTO).toList();
     }
 
-    @Override
-    public ApplicationDto updateApplication(Long id, ApplicationDto applicationDto) {
-        return null;
-    }
 
     @Override
-    public void deleteApplication(Long id) {
+    public String deleteApplication(Long id) {
+        Application application =  applicationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid job application"));
 
+        applicationRepository.delete(application);
+        return "Ready";
     }
 
     private ApplicationDto convertToDTO(Application application){

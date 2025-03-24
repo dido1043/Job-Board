@@ -17,6 +17,10 @@ public class ApplicationController {
     public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
     }
+    @GetMapping("/all")
+    public  ResponseEntity<?> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(applicationService.getAllApplications());
+    }
     @GetMapping("/seeker/{id}")
     public ResponseEntity<?> getApplicationByJobSeekerId(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(applicationService.getApplicationsByApplicantId(id));
@@ -32,5 +36,9 @@ public class ApplicationController {
     @PostMapping("/add")
     public ResponseEntity<?> addApplication(@RequestBody ApplicationDto applicationDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationService.createApplication(applicationDto));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteApplication(@PathVariable Long id){
+        return  ResponseEntity.status(HttpStatus.OK).body(applicationService.deleteApplication(id));
     }
 }
