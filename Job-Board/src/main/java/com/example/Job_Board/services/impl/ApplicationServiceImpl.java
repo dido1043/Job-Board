@@ -46,7 +46,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public List<ApplicationDto> getApplicationsByJobPostId(Long jobPostId) {
-        return List.of();
+        List<Application> applications = applicationRepository.findByJobPostId(jobPostId);
+        return applications.stream().map(this::convertToDTO).toList();
     }
 
     @Override
