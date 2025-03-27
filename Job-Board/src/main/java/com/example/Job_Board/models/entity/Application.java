@@ -23,8 +23,7 @@ public class Application {
     private LocalDateTime applicationDate;
     @ManyToOne
     @JoinColumn(name = "resume_id", nullable = false)
-    private Resume resume; // Relationship with Resume entity
-
+    private Resume resume;
 
     @PrePersist
     protected void onCreate() {
