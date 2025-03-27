@@ -6,9 +6,10 @@ import com.example.Job_Board.repository.ResumeRepository;
 import com.example.Job_Board.repository.UserRepository;
 import com.example.Job_Board.services.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
@@ -20,7 +21,9 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto craeteResume(ResumeDto resumeDto) {
-        return null;
+        Resume resume = convertToEntity(resumeDto);
+        Resume savedResume = resumeRepository.save(resume);
+        return convertToDto(savedResume);
     }
 
     @Override
