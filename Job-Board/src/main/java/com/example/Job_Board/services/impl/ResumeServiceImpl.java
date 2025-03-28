@@ -35,7 +35,10 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public List<ResumeDto> getAllResumes() {
-        return List.of();
+        List<Resume> resumes = resumeRepository.findAll();
+        return resumes.stream()
+                .map(this::convertToDto)
+                .toList();
     }
 
     @Override
@@ -45,7 +48,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public String deleteResume() {
-        return "";
+        return "Resume is deleted";
     }
 
     private ResumeDto convertToDto(Resume resume){
