@@ -43,7 +43,11 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto updateResume(Long id, ResumeDto resumeDto) {
-        return null;
+        Resume resume = resumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inavlid resume"));
+        resume.setFilePath(resumeDto.getFilePath());
+        Resume updatedResume = resumeRepository.save(resume);
+        return convertToDto(updatedResume);
     }
 
     @Override
