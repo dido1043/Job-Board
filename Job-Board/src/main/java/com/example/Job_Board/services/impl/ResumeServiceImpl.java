@@ -28,7 +28,9 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto getResumeById(Long id) {
-        return null;
+        Resume resume = resumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inavlid resume"));
+        return convertToDto(resume);
     }
 
     @Override
