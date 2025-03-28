@@ -51,7 +51,10 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public String deleteResume() {
+    public String deleteResume(Long id) {
+        Resume resume = resumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inavlid resume"));
+        resumeRepository.delete(resume);
         return "Resume is deleted";
     }
 

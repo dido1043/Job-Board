@@ -9,6 +9,6 @@ public interface ResumeService {
     ResumeDto getResumeById(Long id);
     List<ResumeDto> getAllResumes();
     ResumeDto updateResume(Long id, ResumeDto resumeDto);
-    String deleteResume();
+    String deleteResume(Long id);
 }
 
