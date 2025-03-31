@@ -2,7 +2,6 @@ package com.example.Job_Board.controllers;
 
 import com.example.Job_Board.models.dtos.resumeDto.ResumeDto;
 import com.example.Job_Board.services.ResumeService;
-import com.example.Job_Board.services.impl.ResumeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,18 @@ public class ResumeController {
     public ResumeController(ResumeService resumeService) {
         this.resumeService = resumeService;
     }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable  Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(resumeService.getResumeById(id));
+    }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> allResumes(){
+        return ResponseEntity.status(HttpStatus.OK).body(resumeService.getAllResumes());
+    }
+    
     @PostMapping("/add")
-    public ResponseEntity<?> addResume(@RequestBody ResumeDto resumeDto){
+    public ResponseEntity<?> addResume(@RequestBody ResumeDto resumeDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(resumeService.craeteResume(resumeDto));
     }
 }
