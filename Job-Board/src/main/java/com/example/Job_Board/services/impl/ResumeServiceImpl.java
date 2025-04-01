@@ -45,6 +45,7 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDto updateResume(Long id, ResumeDto resumeDto) {
         Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Inavlid resume"));
+
         resume.setFilePath(resumeDto.getFilePath());
         Resume updatedResume = resumeRepository.save(resume);
         return convertToDto(updatedResume);
