@@ -36,4 +36,9 @@ public class ResumeController {
     public ResponseEntity<?> editResume(@PathVariable Long id, @RequestBody ResumeDto resumeDto) {
         return ResponseEntity.status(HttpStatus.OK).body(resumeService.updateResume(id, resumeDto));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteResume(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(resumeService.deleteResume(id));
+    }
 }
