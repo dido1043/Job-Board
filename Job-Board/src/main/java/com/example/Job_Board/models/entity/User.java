@@ -38,6 +38,22 @@ public class User implements UserDetails {
     @Column(name = "skill")
     private List<String> skills = new ArrayList<>();
 
+    public String getSeniority() {
+        return seniority;
+    }
+
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
