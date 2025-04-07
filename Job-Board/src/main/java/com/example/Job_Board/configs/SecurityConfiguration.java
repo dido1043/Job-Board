@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                                 "/post/**",
                                 "/application/**",
                                 "/resume/**",
+                                "/user/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",

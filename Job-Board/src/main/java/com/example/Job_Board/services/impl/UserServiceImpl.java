@@ -16,6 +16,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> showSkillsOfUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getSkills().stream().toList();
+    }
+
+    @Override
     public List<String> addSkills(Long userId, List<String> skills) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
