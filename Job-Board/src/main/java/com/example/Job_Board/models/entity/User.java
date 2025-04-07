@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,8 +27,16 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 20)
     private String role = "JOB_SEEKER"; // 'JOB_SEEKER' or 'RECRUITER'
 
+    @Column(nullable = false, length = 20)
+    private String seniority;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @ElementCollection
+    @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "skill")
+    private List<String> skills = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {
