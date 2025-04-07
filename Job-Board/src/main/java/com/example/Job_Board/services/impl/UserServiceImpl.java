@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -14,6 +16,10 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    private static final Set<String> VALID_SENIORITIES = Set.of(
+            "Intern", "Junior", "Mid", "Senior"
+    );
 
     @Override
     public List<String> showSkillsOfUser(Long userId) {
@@ -39,8 +45,15 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        if (IsValidSeniority(seniority) != true){
+            throw new RuntimeException("Invalid seniority");
+        }
         user.setSeniority(seniority);
         userRepository.save(user);
         return user.getSeniority();
+    }
+
+    private boolean IsValidSeniority(String seniority){
+        return VALID_SENIORITIES.contains(seniority);
     }
 }
