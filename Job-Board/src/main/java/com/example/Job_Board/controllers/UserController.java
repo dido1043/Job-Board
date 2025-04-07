@@ -24,4 +24,9 @@ public class UserController {
     public ResponseEntity<?> addSkills(@PathVariable Long id, @RequestBody List<String> skills){
         return ResponseEntity.status(HttpStatus.OK).body(userService.addSkills(id,skills));
     }
+
+    @PostMapping("/set-seniority/{id}")
+    public ResponseEntity<?> setSeniority(@PathVariable Long id, @RequestBody String seniority){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.setSeniority(id, seniority));
+    }
 }

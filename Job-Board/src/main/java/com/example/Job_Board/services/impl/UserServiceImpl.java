@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         user.setSeniority(seniority);
+        userRepository.save(user);
         return user.getSeniority();
     }
 }

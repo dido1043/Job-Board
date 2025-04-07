@@ -1,5 +1,7 @@
 package com.example.Job_Board.services;
 
+import com.example.Job_Board.models.entity.User;
+
 import java.util.List;
 
 public interface UserService {

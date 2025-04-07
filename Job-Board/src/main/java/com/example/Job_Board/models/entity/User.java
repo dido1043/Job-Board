@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 20)
     private String role = "JOB_SEEKER"; // 'JOB_SEEKER' or 'RECRUITER'
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String seniority;
 
     @Column(nullable = false, updatable = false)
