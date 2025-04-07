@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface JobPostRepository extends JpaRepository<JobPost, Long> {
     List<JobPost> findByRecruiterId(Long recruiterId);
     Optional<JobPost> findById(Long id);
+    List<JobPost> findBySeniorityIgnoreCase(String seniority);
 }

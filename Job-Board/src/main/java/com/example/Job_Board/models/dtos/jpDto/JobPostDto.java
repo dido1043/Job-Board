@@ -29,6 +29,9 @@ public class JobPostDto {
         @NotNull(message = "Salary must be provided")
         private BigDecimal salary;
 
+        @NotNull
+        private String seniority;
+
         @NotNull(message = "Recruiter ID is required")
         private Long recruiterId;
 
@@ -70,5 +73,13 @@ public class JobPostDto {
 
         public void setRecruiterId(Long recruiterId) {
                 this.recruiterId = recruiterId;
+        }
+
+        public String getSeniority() {
+                return seniority;
+        }
+
+        public void setSeniority(String seniority) {
+                this.seniority = seniority;
         }
 }

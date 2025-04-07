@@ -25,6 +25,9 @@ public class JobPost {
     @Column(length = 100)
     private String location;
 
+    @Column(length = 100)
+    private String seniority;
+
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
 
@@ -75,6 +78,13 @@ public class JobPost {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+    public String getSeniority() {
+        return seniority;
+    }
+
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
     }
 
     public BigDecimal getSalary() {

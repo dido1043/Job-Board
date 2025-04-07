@@ -10,4 +10,5 @@ public interface JobPostService {
     String deleteJobPost(Long id);
     List<JobPostDto> getAllJobPosts();
     JobPostDto getJobPostById(Long id);
+    List<JobPostDto> filterJobs(String seniority);
 }

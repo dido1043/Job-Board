@@ -29,6 +29,11 @@ public class JobPostController {
     public ResponseEntity<?> getById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(jobPostService.getJobPostById(id));
     }
+    @GetMapping("/filter/{seniority}")
+    public ResponseEntity<?> filterBySeniority(@PathVariable String seniority){
+        return ResponseEntity.status(HttpStatus.OK).body(jobPostService.filterJobs(seniority));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody JobPostDto jobPostDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(jobPostService.createJobPost(jobPostDto));
