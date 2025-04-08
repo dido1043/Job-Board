@@ -12,13 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/post")
 public class JobPostController {
-
    private final JobPostService jobPostService;
-
     @Autowired
     public JobPostController(JobPostService jobPostService) {
         this.jobPostService = jobPostService;
-
     }
     @GetMapping("/all")
     public ResponseEntity<?> allJobPosts(){
@@ -37,8 +34,6 @@ public class JobPostController {
     public ResponseEntity<?> recommendedJobs(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(jobPostService.recommendedJobs(id));
     }
-
-
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody JobPostDto jobPostDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(jobPostService.createJobPost(jobPostDto));
