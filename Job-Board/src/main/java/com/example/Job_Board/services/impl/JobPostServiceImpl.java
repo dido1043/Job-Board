@@ -98,9 +98,6 @@ public class JobPostServiceImpl implements JobPostService {
                 .filter(j -> isMatchJob(user, j))
                 .toList();
 
-//        if(recommendedJobs.stream().count() == 0){
-//            throw new RuntimeException("Cannot find jobs for you!");
-//        }
         return recommendedJobs
                 .stream()
                 .map(this::convertToDTO)

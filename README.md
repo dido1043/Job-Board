@@ -16,8 +16,9 @@ RESTful API for job and user management
 
 🛠️ Tech Stack
 
-Backend: Spring Boot, Hibernate (JPA), MySQL
+Back-end: Spring Boot, Hibernate (JPA), MySQL
 
+Front-end: React
 
 Database: MySQL
 
