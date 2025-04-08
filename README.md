@@ -1,11 +1,11 @@
-###JobBoard
+JobBoard
 
 
-##📌 Overview
+📌 Overview
 
 The Job Board Application is a Spring Boot-based web application designed to help users post and manage job listings. It allows users to create, edit, and delete job postings while also managing user profiles and resumes.
 
-##🚀 Features
+🚀 Features
 
 User authentication and registration
 Job posting and management
@@ -14,7 +14,7 @@ Search and filter job listings
 RESTful API for job and user management
 
 
-##🛠️ Tech Stack
+🛠️ Tech Stack
 
 Back-end: Spring Boot, Hibernate (JPA), MySQL
 
@@ -24,6 +24,6 @@ Database: MySQL
 
 Tools: Maven, Git
 
-##🗃️ Database Schema
+🗃️ Database Schema
 
 ![img.png](/Readme-images/img.png)
