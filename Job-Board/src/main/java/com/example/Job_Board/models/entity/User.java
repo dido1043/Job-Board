@@ -28,31 +28,16 @@ public class User implements UserDetails {
     private String role = "JOB_SEEKER"; // 'JOB_SEEKER' or 'RECRUITER'
 
     @Column(length = 20)
-    private String seniority;
+    private String seniority = "";
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+    //Todo: Fix register issues: Issue- Skills list have to be nullable
 
     @ElementCollection
     @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "skill")
-    private List<String> skills = new ArrayList<>();
-
-    public String getSeniority() {
-        return seniority;
-    }
-
-    public void setSeniority(String seniority) {
-        this.seniority = seniority;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
+    private List<String> skills = new ArrayList<String>();
 
     @PrePersist
     protected void onCreate() {
@@ -60,7 +45,7 @@ public class User implements UserDetails {
     }
 
     @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<JobPost> jobPosts;
+    private List<JobPost> jobPosts = new ArrayList<JobPost>();
 
     public List<JobPost> getJobPosts() {
         return jobPosts;
@@ -140,6 +125,21 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public String getSeniority() {
+        return seniority;
+    }
+
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }

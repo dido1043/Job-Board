@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (IsValidSeniority(seniority) != true){
+        if (!IsValidSeniority(seniority)){
             throw new RuntimeException("Invalid seniority");
         }
         user.setSeniority(seniority);
