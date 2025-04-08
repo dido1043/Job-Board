@@ -1,9 +1,11 @@
 package com.example.Job_Board.models.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
+
 
 @Entity
 @Table(name = "job_posts")
@@ -30,6 +32,11 @@ public class JobPost {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
+
+    @ElementCollection
+    @CollectionTable(name = "job_post_skills", joinColumns = @JoinColumn(name = "job_post_id"))
+    @Column(name = "skill")
+    private List<String> skills = new ArrayList<>();
 
     private LocalDateTime createdAt;
 
@@ -93,6 +100,14 @@ public class JobPost {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
     }
 
     public LocalDateTime getCreatedAt() {

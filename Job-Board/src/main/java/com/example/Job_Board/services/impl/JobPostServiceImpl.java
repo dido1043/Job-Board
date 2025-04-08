@@ -48,7 +48,7 @@ public class JobPostServiceImpl implements JobPostService {
         jobPost.setLocation(jobPostDto.getLocation());
         jobPost.setSeniority(jobPostDto.getSeniority());
         jobPost.setSalary(jobPostDto.getSalary());
-
+        jobPost.setSkills(jobPostDto.getSkills());
         JobPost updatedJobPost = jobPostRepository.save(jobPost);
         return convertToDTO(updatedJobPost);
     }
@@ -96,6 +96,7 @@ public class JobPostServiceImpl implements JobPostService {
         jobPostDto.setLocation(jobPost.getLocation());
         jobPostDto.setSeniority(jobPost.getSeniority());
         jobPostDto.setSalary(jobPost.getSalary());
+        jobPostDto.setSkills(jobPost.getSkills());
         jobPostDto.setRecruiterId(jobPost.getRecruiter().getId());
 
         return jobPostDto;
@@ -109,6 +110,7 @@ public class JobPostServiceImpl implements JobPostService {
         jobPost.setSeniority(IsValidSeniority(jobPostDto.getSeniority()) == true?
                 jobPostDto.getSeniority() : "");
         jobPost.setSalary(jobPostDto.getSalary());
+        jobPost.setSkills(jobPostDto.getSkills());
         User recruiter = userRepository.findById(jobPostDto.getRecruiterId())
                 .orElseThrow(() -> new RuntimeException("Recruiter with ID " + jobPostDto.getRecruiterId() + " not found"));
         jobPost.setRecruiter(recruiter);
@@ -117,5 +119,9 @@ public class JobPostServiceImpl implements JobPostService {
 
     private boolean IsValidSeniority(String seniority) {
         return VALID_SENIORITIES.contains(seniority);
+    }
+
+    private boolean isMatchJob(User user, JobPost jobPost){
+        return jobPost.getSeniority().equalsIgnoreCase(user.getSeniority());
     }
 }

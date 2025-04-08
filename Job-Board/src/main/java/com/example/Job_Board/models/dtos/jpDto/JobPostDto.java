@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class JobPostDto {
@@ -32,6 +33,7 @@ public class JobPostDto {
         @NotNull
         private String seniority;
 
+        private List<String> skills;
         @NotNull(message = "Recruiter ID is required")
         private Long recruiterId;
 
@@ -81,5 +83,13 @@ public class JobPostDto {
 
         public void setSeniority(String seniority) {
                 this.seniority = seniority;
+        }
+
+        public List<String> getSkills() {
+                return skills;
+        }
+
+        public void setSkills(List<String> skills) {
+                this.skills = skills;
         }
 }
