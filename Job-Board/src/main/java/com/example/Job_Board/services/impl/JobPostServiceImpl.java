@@ -20,7 +20,7 @@ public class JobPostServiceImpl implements JobPostService {
     private static final Set<String> VALID_SENIORITIES = Set.of(
             "Intern", "Junior", "Mid", "Senior"
     );
-    //Todo: Job recommendation
+
     @Autowired
     public JobPostServiceImpl(JobPostRepository jobPostRepository, UserRepository userRepository) {
         this.jobPostRepository = jobPostRepository;

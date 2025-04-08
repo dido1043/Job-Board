@@ -23,3 +23,7 @@ Front-end: React
 Database: MySQL
 
 Tools: Maven, Git
+
+Db schema:
+
+![img.png](/Readme images/img.png)
