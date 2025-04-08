@@ -26,4 +26,4 @@ Tools: Maven, Git
 
 Db schema:
 
-![img.png](/Readme images/img.png)
+![img.png](/Readme-images/img.png)
