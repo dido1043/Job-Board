@@ -87,7 +87,25 @@ public class JobPostServiceImpl implements JobPostService {
         }
         return List.of();
     }
+    @Override
+    public List<JobPostDto> recommendedJobs(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
+        List<JobPost> recommendedJobs = jobPostRepository
+                .findAll()
+                .stream()
+                .filter(j -> isMatchJob(user, j))
+                .toList();
+
+//        if(recommendedJobs.stream().count() == 0){
+//            throw new RuntimeException("Cannot find jobs for you!");
+//        }
+        return recommendedJobs
+                .stream()
+                .map(this::convertToDTO)
+                .toList();
+    }
     private JobPostDto convertToDTO(JobPost jobPost) {
         JobPostDto jobPostDto = new JobPostDto();
         jobPostDto.setId(jobPost.getId());
@@ -122,6 +140,7 @@ public class JobPostServiceImpl implements JobPostService {
     }
 
     private boolean isMatchJob(User user, JobPost jobPost){
-        return jobPost.getSeniority().equalsIgnoreCase(user.getSeniority());
+        return jobPost.getSeniority().equals(user.getSeniority()) &&
+                jobPost.getSkills().stream().anyMatch(s -> user.getSkills().contains(s));
     }
 }
