@@ -62,6 +62,12 @@ public class UserServiceImpl implements UserService {
         return user.getRole();
     }
 
+    @Override
+    public String becomeRecruiter(Long id) {
+        //Todo:Implement logic here
+        return "";
+    }
+
     private boolean IsValidSeniority(String seniority){
         return VALID_SENIORITIES.contains(seniority);
     }
