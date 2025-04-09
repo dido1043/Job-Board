@@ -53,6 +53,15 @@ public class UserServiceImpl implements UserService {
         return user.getSeniority();
     }
 
+    @Override
+    public String makeAdmin(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setRole("ADMIN");
+        return user.getRole();
+    }
+
     private boolean IsValidSeniority(String seniority){
         return VALID_SENIORITIES.contains(seniority);
     }

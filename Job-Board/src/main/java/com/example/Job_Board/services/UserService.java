@@ -8,4 +8,5 @@ public interface UserService {
     List<String> showSkillsOfUser(Long userId);
     List<String> addSkills(Long userId, List<String> skills);
     String setSeniority(Long userId, String seniority);
+    String makeAdmin(Long id);
 }
