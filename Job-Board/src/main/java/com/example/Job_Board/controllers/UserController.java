@@ -29,4 +29,9 @@ public class UserController {
     public ResponseEntity<?> setSeniority(@PathVariable Long id, @RequestBody String seniority){
         return ResponseEntity.status(HttpStatus.OK).body(userService.setSeniority(id, seniority));
     }
+    @PostMapping("/make-admin/{id}")
+    public ResponseEntity<?> makeAdmin(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.makeAdmin(id));
+    }
+
 }
