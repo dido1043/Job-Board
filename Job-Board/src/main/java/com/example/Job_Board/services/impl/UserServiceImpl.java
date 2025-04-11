@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
         user.setRole("ADMIN");
         userRepository.save(user);
-        return user.getEmail() + "is admin!";
+        return user.getEmail() + " is admin!";
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setRole("RECRUITER");
         userRepository.save(user);
-        return user.getEmail() + "is recruiter!";
+        return user.getEmail() + " is recruiter!";
     }
 
     private boolean IsValidSeniority(String seniority){
