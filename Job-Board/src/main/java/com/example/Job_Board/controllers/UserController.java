@@ -33,5 +33,8 @@ public class UserController {
     public ResponseEntity<?> makeAdmin(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.makeAdmin(id));
     }
-
+    @PostMapping("/become-recruiter/{id}")
+    public ResponseEntity<?> becomeRecruiter(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.becomeRecruiter(id));
+    }
 }
