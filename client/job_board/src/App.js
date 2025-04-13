@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import AllJobPosts from './views/JobPosts/AllJobPosts';
 import Header from './components/navigation/Header';
 import Login from './views/User/Login';
+import Register from './views/User/Register';
+
+
 function App() {
   return (
     <div>
@@ -13,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/jobs/all" element={<AllJobPosts />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
 
