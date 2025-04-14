@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';    
+import { Link } from 'react-router-dom';  
+import BaseButton from '../shared/BaseButton';  
 //todo:add logic
 const Header = () => {  
+    const LogoutFn = () => {
+        //implement logout logic here   
+        // e.g., clear token, redirect to login page, etc.
+        console.log("Logout function called");
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -24,12 +30,7 @@ const Header = () => {
                             <Link className="nav-link" to="/register">Register</Link>
                         </li>
                         <li className="nav-item">
-                            <button className="btn btn-link nav-link" onClick={() => {
-                                // localStorage.removeItem('authToken'); 
-                                // window.location.href = '/'; 
-                            }}>
-                                Logout
-                            </button>
+                            <BaseButton text="Logout" type="button" onClick={() => LogoutFn()}/>
                         </li>
                     </ul>
                 </div>
