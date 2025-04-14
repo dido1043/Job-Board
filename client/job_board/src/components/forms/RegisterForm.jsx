@@ -46,7 +46,7 @@ const RegisterForm = () => {
         e.preventDefault();
         const validationErrors = validateForm();
 
-        
+
         if (Object.keys(validationErrors).length === 0) {
             new Promise((resolve, reject) => {
                 axios.post(`http://localhost:8080/auth/register`, formData, {
@@ -55,10 +55,31 @@ const RegisterForm = () => {
                         'Accept': '/'
                     }
                 })
-                .then((response) => resolve(response))
-                .catch((error) => reject(error));
+                    .then((response) => resolve(response))
+                    .catch((error) => reject(error));
+            }).then((response) => {
+                setHandleSuccess({
+                    status: response.status,
+                    message: handleSuccess.message
+                });
+                setRegister(true);
+                console.log(handleSuccess);
+                console.log(response);
+            }).catch((error) => {
+                setHandleError({
+                    status: error.response.status,
+                    message: error.response.data.message
+                });
+                console.log(handleError);
+                console.log(error);
             });
-            
+            setFormData({
+                username: '',
+                email: '',
+                password: ''
+            });
+
+
         } else {
             setErrors(validationErrors);
         }
