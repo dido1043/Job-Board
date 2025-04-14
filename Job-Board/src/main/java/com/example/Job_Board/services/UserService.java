@@ -10,4 +10,5 @@ public interface UserService {
     String setSeniority(Long userId, String seniority);
     String makeAdmin(Long id);
     String becomeRecruiter(Long id);
+    Long findUserByEmail(String email);
 }

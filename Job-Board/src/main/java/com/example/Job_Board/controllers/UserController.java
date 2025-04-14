@@ -37,4 +37,8 @@ public class UserController {
     public ResponseEntity<?> becomeRecruiter(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.becomeRecruiter(id));
     }
+    @GetMapping("/find/{email}")
+    public ResponseEntity<?> findByEmail(@PathVariable String email){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findUserByEmail(email));
+    }
 }

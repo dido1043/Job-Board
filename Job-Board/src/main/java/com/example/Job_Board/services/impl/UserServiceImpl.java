@@ -72,6 +72,13 @@ public class UserServiceImpl implements UserService {
         return user.getEmail() + " is recruiter!";
     }
 
+    @Override
+    public Long findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getId();
+    }
+
     private boolean IsValidSeniority(String seniority){
         return VALID_SENIORITIES.contains(seniority);
     }
