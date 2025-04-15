@@ -55,7 +55,7 @@ const Register = () => {
         axios.post(`http://localhost:8080/auth/register`, formData, {
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': '/'
+                'Accept': '*/*'
             }
         }).then((response) => {
             console.log(response.data);

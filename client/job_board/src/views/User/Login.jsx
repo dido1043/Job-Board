@@ -34,11 +34,11 @@ const Login = () => {
             const response = await axios.get(`http://localhost:8080/user/find/${email}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': '/'
+                    'Accept': '*/*'
                 }
             });
 
-            localStorage.setItem('userId', response.data.id); // Store user ID in local storage
+            localStorage.setItem('userId', response.data); // Store user ID in local storage
 
         } catch (error) {
             setError({
@@ -59,12 +59,12 @@ const Login = () => {
             const response = await axios.post(`http://localhost:8080/auth/login`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': '/'
+                    'Accept': '*/*'
                 }
             });
             if (response.status === 200) {
 
-                localStorage.setItem('token', response.data.accessToken); 
+                localStorage.setItem('token', response.data.token); 
                 localStorage.setItem('tokenExpiration', response.data.expiresIn);
                 localStorage.setItem('userEmail', formData.email); 
                 await getUserId(formData.email); 
