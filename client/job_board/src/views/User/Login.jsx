@@ -43,7 +43,7 @@ const Login = () => {
         } catch (error) {
             setError({
                 message: 'Error fetching user ID'
-            }); 
+            });
         }
     }
     //Get user role
@@ -51,19 +51,62 @@ const Login = () => {
 
     // }
 
+    const handleSubmit = async (e) => {
+        setError([]);
+        e.preventDefault();
+        const formErrors = validateForm();
+        try{
+            const response = await axios.post(`http://localhost:8080/auth/login`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '/'
+                }
+            });
+            if (response.status === 200) {
+
+                localStorage.setItem('token', response.data.accessToken); 
+                localStorage.setItem('tokenExpiration', response.data.expiresIn);
+                localStorage.setItem('userEmail', formData.email); 
+                await getUserId(formData.email); 
+                navigate('/');
+            }else{
+                console.log("Login failed");
+                
+            }
+        }catch(err){
+            setError({
+                message: 'Invalid email or password'
+            });
+        }
+    }
     return (
         <div className="container mt-5">
             <h2>Login</h2>
             <form>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" placeholder="Enter email" required />
+                    <InputField
+                        label="Email"
+                        type="text"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        required={true}
+                    />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" placeholder="Password" required />
+                    <InputField
+                        label="Password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                        required={true}
+                    />
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+
+                <BaseButton text="Login" type="submit" onClick={handleSubmit}/>
             </form>
         </div>
     );

@@ -45,44 +45,33 @@ const Register = () => {
 
 
     const handleSubmit = (e) => {
-        setErrors([])
+        setErrors({});
         e.preventDefault();
-        const validationErrors = validateForm();
-
-
-        if (Object.keys(validationErrors).length === 0) {
-            new Promise((resolve, reject) => {
-                axios.post(`http://localhost:8080/auth/register`, formData, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': '/'
-                    }
-                })
-                    .then((response) => resolve(response))
-                    .catch((error) => reject(error));
-            }).then((response) => {
-                setHandleSuccess({
-                    status: response.status,
-                    message: handleSuccess.message
-                });
-                setRegister(true);
-            }).catch((error) => {
-                setHandleError({
-                    status: error.response.status,
-                    message: error.response.data.message
-                });
-            });
-            setFormData({
-                username: '',
-                email: '',
-                password: ''
-            });
-            navigate('/');
-
-        } else {
-            setErrors(validationErrors);
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
         }
-
+        axios.post(`http://localhost:8080/auth/register`, formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '/'
+            }
+        }).then((response) => {
+            console.log(response.data);
+            setRegister(true)
+            setHandleSuccess({
+                status: 'Success',
+                message: 'Successful register!'
+            })
+            navigate('/login')
+        }).catch((error) => {
+            console.log(error.response.data.message);
+            setHandleError({
+                status: 'Error',
+                message: error.response.data.message
+            })
+        });
     }
     return (
         <div className="container mt-5">

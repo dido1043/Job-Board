@@ -79,6 +79,15 @@ public class UserServiceImpl implements UserService {
         return user.getId();
     }
 
+    @Override
+    public String deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        userRepository.delete(user);
+        return "User is deleted";
+    }
+
     private boolean IsValidSeniority(String seniority){
         return VALID_SENIORITIES.contains(seniority);
     }

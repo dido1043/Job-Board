@@ -11,4 +11,5 @@ public interface UserService {
     String makeAdmin(Long id);
     String becomeRecruiter(Long id);
     Long findUserByEmail(String email);
+    String deleteUser(Long id);
 }
