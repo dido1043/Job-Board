@@ -69,6 +69,7 @@ const Login = () => {
                 localStorage.setItem('userEmail', formData.email); 
                 await getUserId(formData.email); 
                 navigate('/');
+                window.location.reload();
             }else{
                 console.log("Login failed");
                 

@@ -1,11 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';  
-import BaseButton from '../shared/BaseButton';  
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import BaseButton from '../shared/BaseButton';
+
 //todo:add logic
-const Header = () => {  
+const Header = () => {
+    const [token, setToken] = useState(() => localStorage.getItem("token"))
+    //const [role, setRole] = useState(() => localStorage.getItem("role"));
+
     const LogoutFn = () => {
-        //implement logout logic here   
-        // e.g., clear token, redirect to login page, etc.
+        localStorage.clear();
+        setToken(null);
+        //setRole(null);
+        
+        window.location.reload();
+        Navigate('/');
         console.log("Logout function called");
     }
     return (
@@ -23,15 +31,22 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/jobs/all">All Jobs</Link>
                         </li>
-                        <li>
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                        <li className="nav-item">
-                            <BaseButton text="Logout" type="button" onClick={() => LogoutFn()}/>
-                        </li>
+                        {token != null ?
+                            <>
+                                <li className="nav-item">
+                                    <BaseButton text="Logout" type="button" onClick={() => LogoutFn()} />
+                                </li>
+                            </> :
+                            <>
+                                <li>
+                                    <Link className="nav-link" to="/login">Login</Link>
+                                </li>
+                                <li>
+                                    <Link className="nav-link" to="/register">Register</Link>
+                                </li>
+                            </>}
+
+
                     </ul>
                 </div>
             </div>
