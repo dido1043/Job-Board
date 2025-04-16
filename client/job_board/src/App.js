@@ -6,6 +6,7 @@ import AllJobPosts from './views/JobPosts/AllJobPosts';
 import Header from './components/navigation/Header';
 import Login from './views/User/Login';
 import Register from './views/User/Register';
+import UserPage from './views/User/UserPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/jobs/all" element={<AllJobPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/user/:userId" element={<UserPage/>} />
       </Routes>
     </div>
 

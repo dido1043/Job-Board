@@ -68,7 +68,7 @@ const Login = () => {
                 localStorage.setItem('tokenExpiration', response.data.expiresIn);
                 localStorage.setItem('userEmail', formData.email); 
                 await getUserId(formData.email); 
-                navigate('/');
+                navigate(`/user/${localStorage.getItem('userId')}`); 
                 window.location.reload();
             }else{
                 console.log("Login failed");

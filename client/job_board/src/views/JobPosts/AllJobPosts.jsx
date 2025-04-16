@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 const AllJobPosts = () => {
     const [jobs, setJobs] = useState([]);
+
+    const [error, setError] = useState({
+        message: ''
+    });
+    
     useEffect(() => {
 
         const showJobs = async () => {
@@ -15,7 +20,9 @@ const AllJobPosts = () => {
 
                 setJobs(response.data)
             } catch (err) {
-                console.error("Error fetching jobs", err);
+               setError({
+                    message: 'Error fetching jobs'
+                });
             }
 
         }
