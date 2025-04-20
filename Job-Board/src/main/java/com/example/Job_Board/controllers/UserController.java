@@ -35,6 +35,10 @@ public class UserController {
     public ResponseEntity<?> makeAdmin(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.makeAdmin(id));
     }
+    @GetMapping("/get-role/{id}")
+    public ResponseEntity<?> getUserRole(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserRole(id));  
+    }
     @PostMapping("/become-recruiter/{id}")
     public ResponseEntity<?> becomeRecruiter(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.becomeRecruiter(id));
