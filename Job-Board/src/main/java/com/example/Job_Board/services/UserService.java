@@ -9,6 +9,7 @@ public interface UserService {
     List<String> addSkills(Long userId, List<String> skills);
     String setSeniority(Long userId, String seniority);
     String makeAdmin(Long id);
+    String getUserRole(Long id);
     String becomeRecruiter(Long id);
     Long findUserByEmail(String email);
     String deleteUser(Long id);

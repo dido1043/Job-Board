@@ -64,6 +64,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getUserRole(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getRole();
+    }
+
+    @Override
     public String becomeRecruiter(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
