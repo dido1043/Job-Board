@@ -1,5 +1,6 @@
 package com.example.Job_Board.controllers;
 
+import com.example.Job_Board.models.dtos.userDtos.SeniorityRequestDTO;
 import com.example.Job_Board.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/set-seniority/{id}")
-    public ResponseEntity<?> setSeniority(@PathVariable Long id, @RequestBody String seniority){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.setSeniority(id, seniority));
+    public ResponseEntity<?> setSeniority(@PathVariable Long id, @RequestBody SeniorityRequestDTO seniorityRequestDTO){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.setSeniority(id, seniorityRequestDTO.getSeniority()));
     }
     @PostMapping("/make-admin/{id}")
     public ResponseEntity<?> makeAdmin(@PathVariable Long id){

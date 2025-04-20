@@ -32,7 +32,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    //Todo: Fix register issues: Issue- Skills list have to be nullable
+
 
     @ElementCollection
     @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
