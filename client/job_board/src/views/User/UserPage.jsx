@@ -13,10 +13,13 @@ const UserPage = () => {
     message: ''
   });
 
+  
   const handleSkillsChange = (e) => {
 
     setSkills(e.target.value.split(',').map(skill => skill.trim()));
   }
+
+  //Add skills to user
   const addSkillsToUser = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +40,7 @@ const UserPage = () => {
     }
   }
 
-
+  //Fetch user skills
   useEffect(() => {
     const fetchUserSkills = async () => {
       try {
@@ -57,7 +60,7 @@ const UserPage = () => {
     }
     fetchUserSkills()
   }, [userId])
-
+  //Set seniority to user
   const seniorityOnChange = (e) => {
     setSeniority(e.target.value);
   };
