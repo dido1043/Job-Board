@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
         user.setRole("ADMIN");
         userRepository.save(user);
-        return user.getEmail() + " is admin!";
+        return user.getRole();
     }
 
     @Override
