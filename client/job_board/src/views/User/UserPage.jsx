@@ -109,7 +109,19 @@ const UserPage = () => {
   };
   //Become recruiter
   const becomeRecruiter = async (e) => {
-
+    try {
+        const response = await axios.post(`http://localhost:8080/user/become-recruiter/${userId}`, null, {
+          headers:{
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          }
+        });
+        localStorage.setItem('userRole', response.data);
+        setUserRole(response.data);
+        
+    } catch (error) {
+      
+    }
   }
   return (
     <div className="container mt-5">
@@ -145,17 +157,7 @@ const UserPage = () => {
           </div>
         </div>
         <div className="mb-3 d-flex gap-2">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              // Logic to become recruiter
-              console.log("User became a recruiter");
-            }}
-          >
-            Become Recruiter
-          </button>
-
+          <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter}/>
         </div>
         {localStorage.getItem('userRole') === 'ADMIN' ? <div>
           <InputField
