@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setRole("RECRUITER");
         userRepository.save(user);
-        return user.getEmail() + " is recruiter!";
+        return user.getRole();
     }
 
     @Override
