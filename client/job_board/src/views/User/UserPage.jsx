@@ -3,19 +3,19 @@ import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
 import axios from 'axios';
 const UserPage = () => {
-  //todo: add user page logic
+
   const [seniority, setSeniority] = useState();
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
-
+  const [userRole, setUserRole] = useState();
+  const [candidateForAdmin, setCandidateForAdmin] = useState();
   const [error, setError] = useState({
     message: ''
   });
 
-  
-  const handleSkillsChange = (e) => {
 
+  const handleSkillsChange = (e) => {
     setSkills(e.target.value.split(',').map(skill => skill.trim()));
   }
 
@@ -67,7 +67,7 @@ const UserPage = () => {
   const addSeniorityToUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/user/set-seniority/${userId}`, {seniority} , {
+      const response = await axios.post(`http://localhost:8080/user/set-seniority/${userId}`, { seniority }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -82,6 +82,33 @@ const UserPage = () => {
         message: 'Error adding seniority to user'
       });
     }
+
+  }
+  //Make user admin 
+  const makeAdmin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:8080/user/make-admin/${candidateForAdmin}`, null, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        }
+      });
+      console.log(response.data);
+      localStorage.setItem('userRole', response.data);
+      setUserRole(response.data);
+    } catch (error) {
+      setError({
+        message: 'Error making user admin'
+      });
+    }
+
+  }
+  const handleCandidateIdChange = (e) => {
+    setCandidateForAdmin(e.target.value);
+  };
+  //Become recruiter
+  const becomeRecruiter = async (e) => {
 
   }
   return (
@@ -128,17 +155,22 @@ const UserPage = () => {
           >
             Become Recruiter
           </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => {
-              // Logic to make admin (for admins only)
-              console.log("User made admin");
-            }}
-          >
-            Make Admin
-          </button>
+
         </div>
+        {localStorage.getItem('userRole') === 'ADMIN' ? <div>
+          <InputField
+            label="User id:"
+            type="text"
+            name="userId"
+            id="userId"
+            value={candidateForAdmin}
+            onChange={handleCandidateIdChange}
+            className="form-control"
+            placeholder="Enter user id"
+          />
+          <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
+        </div> : <></>}
+
       </form>
     </div>
   );
