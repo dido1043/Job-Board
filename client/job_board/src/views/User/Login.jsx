@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from '../../components/shared/InputField';
@@ -29,7 +29,6 @@ const Login = () => {
     };
     //Get user id
     const getUserId = async (email) => {
-        // Implement logic to get user ID from the backend or context
         try {
             const response = await axios.get(`http://localhost:8080/user/find/${email}`, {
                 headers: {
@@ -37,9 +36,9 @@ const Login = () => {
                     'Accept': '*/*'
                 }
             });
-
-            localStorage.setItem('userId', response.data); // Store user ID in local storage
-
+            const userId = response.data;
+            localStorage.setItem('userId', userId);
+            return userId;
         } catch (error) {
             setError({
                 message: 'Error fetching user ID'
@@ -47,15 +46,29 @@ const Login = () => {
         }
     }
     //Get user role
-    // const getUserRole = async () => {
+    const getUserRole = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/user/get-role/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            localStorage.setItem('userRole', response.data); 
+            console.log(response.data); // Log the user role
+        } catch (err) {
+            setError({
+                message: 'Error fetching user role'
+            });
+        }
+    }
 
-    // }
 
     const handleSubmit = async (e) => {
         setError([]);
         e.preventDefault();
         const formErrors = validateForm();
-        try{
+        try {
             const response = await axios.post(`http://localhost:8080/auth/login`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,17 +77,23 @@ const Login = () => {
             });
             if (response.status === 200) {
 
-                localStorage.setItem('token', response.data.token); 
+                localStorage.setItem('token', response.data.token);
                 localStorage.setItem('tokenExpiration', response.data.expiresIn);
-                localStorage.setItem('userEmail', formData.email); 
-                await getUserId(formData.email); 
-                navigate(`/user/${localStorage.getItem('userId')}`); 
-                window.location.reload();
-            }else{
+                localStorage.setItem('userEmail', formData.email);
+
+                const userId = await getUserId(formData.email);
+
+                if (userId) {
+                    console.log("userId before calling getUserRole:", userId);
+                    await getUserRole(userId);
+                    navigate(`/user/${localStorage.getItem('userId')}`);
+                    window.location.reload();
+                }
+            } else {
                 console.log("Login failed");
-                
+
             }
-        }catch(err){
+        } catch (err) {
             setError({
                 message: 'Invalid email or password'
             });
@@ -107,7 +126,7 @@ const Login = () => {
                     />
                 </div>
 
-                <BaseButton text="Login" type="submit" onClick={handleSubmit}/>
+                <BaseButton text="Login" type="submit" onClick={handleSubmit} />
             </form>
         </div>
     );
