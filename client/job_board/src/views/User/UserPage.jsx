@@ -120,7 +120,9 @@ const UserPage = () => {
         setUserRole(response.data);
         
     } catch (error) {
-      
+      setError({
+        message: 'Error making user recruiter'
+      });
     }
   }
   return (
