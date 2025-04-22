@@ -45,10 +45,10 @@ const Header = () => {
                                 </li>
                             </>}
 
-                            {token != null &&
+                            {token != null ?
                                 <li className="username nav-item ms-auto">
                                     <Link className="nav-link" to={`/user/${localStorage.getItem('userId')}`}>{localStorage.getItem('username')}</Link>
-                                </li>
+                                </li>:<></>
                             }
                     </ul>
                 </div>
