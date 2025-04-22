@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const UserPage = () => {
 
@@ -14,6 +15,7 @@ const UserPage = () => {
     message: ''
   });
 
+  const navigate = useNavigate();
 
   const handleSkillsChange = (e) => {
     setSkills(e.target.value.split(',').map(skill => skill.trim()));
@@ -125,6 +127,30 @@ const UserPage = () => {
       });
     }
   }
+  //Delete user
+  const deleteUser = async (e) => {
+    try{
+      const response = await axios.delete(`http://localhost:8080/user/delete/${userId}`, null, {
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        }
+      });
+      localStorage.clear();
+      setUserRole(null);
+      setUserId(null);
+      setAllSkills([]);
+      setSkills([]);
+      setSeniority(null);
+      setCandidateForAdmin(null);
+      navigate('/login');
+      window.location.reload();
+    }catch(error){
+      setError({
+        message: 'Error deleting user'
+      });
+    }
+  }
   return (
     <div className="container mt-5">
       <form>
@@ -174,8 +200,10 @@ const UserPage = () => {
           />
           <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
         </div> : <></>}
-
+        <BaseButton text="Delete me" type="button" className="btn btn-danger" onClick={deleteUser}/>
+        
       </form>
+      <br/>
     </div>
   );
 }

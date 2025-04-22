@@ -9,8 +9,6 @@ const Header = () => {
     const LogoutFn = () => {
         localStorage.clear();
         setToken(null);
-        //setRole(null);
-        
         window.location.reload();
         Navigate('/');
         console.log("Logout function called");
