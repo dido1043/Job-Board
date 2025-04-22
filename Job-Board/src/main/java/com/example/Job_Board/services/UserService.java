@@ -12,5 +12,6 @@ public interface UserService {
     String getUserRole(Long id);
     String becomeRecruiter(Long id);
     Long findUserByEmail(String email);
+    String getUsername(Long id);
     String deleteUser(Long id);
 }

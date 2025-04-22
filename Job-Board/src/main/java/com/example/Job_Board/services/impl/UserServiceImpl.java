@@ -88,6 +88,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getUsername(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        return user.getUsername();
+    }
+
+    @Override
     public String deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
