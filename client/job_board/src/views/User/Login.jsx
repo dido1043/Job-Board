@@ -63,6 +63,22 @@ const Login = () => {
         }
     }
 
+    //Get usernamre
+    const getUsername = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/user/get-username/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            localStorage.setItem('username', response.data);
+        }catch (err) {
+            setError({
+                message: 'Error fetching username'
+            });
+        }
+    }
 
     const handleSubmit = async (e) => {
         setError([]);
@@ -80,12 +96,13 @@ const Login = () => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('tokenExpiration', response.data.expiresIn);
                 localStorage.setItem('userEmail', formData.email);
-
+                
                 const userId = await getUserId(formData.email);
 
                 if (userId) {
                     console.log("userId before calling getUserRole:", userId);
                     await getUserRole(userId);
+                    await getUsername(userId);
                     navigate(`/user/${localStorage.getItem('userId')}`);
                     window.location.reload();
                 }

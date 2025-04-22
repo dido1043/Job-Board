@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import BaseButton from '../shared/BaseButton';
-
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../assets/headerStyle.css';
 const Header = () => {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
     //const [role, setRole] = useState(() => localStorage.getItem("role"));
@@ -21,7 +22,7 @@ const Header = () => {
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="nav-div collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
@@ -44,7 +45,11 @@ const Header = () => {
                                 </li>
                             </>}
 
-
+                            {token != null &&
+                                <li className="username nav-item ms-auto">
+                                    <Link className="nav-link" to={`/user/${localStorage.getItem('userId')}`}>{localStorage.getItem('username')}</Link>
+                                </li>
+                            }
                     </ul>
                 </div>
             </div>

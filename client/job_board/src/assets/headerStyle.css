@@ -1,0 +1,6 @@
+.username {
+    position: absolute;
+    right: 0;
+    top: 0; /* Adjust as needed */
+    font-weight: bold;
+}
