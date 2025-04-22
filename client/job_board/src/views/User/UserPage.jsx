@@ -172,7 +172,7 @@ const UserPage = () => {
             onChange={seniorityOnChange}
             value={seniority}
           >
-            <option value="" disabled>Select seniority</option>
+            <option value="" disabled selected>Select seniority</option>
             <option value="Intern">Intern</option>
             <option value="Junior">Junior</option>
             <option value="Mid">Mid</option>
