@@ -7,6 +7,7 @@ import Header from './components/navigation/Header';
 import Login from './views/User/Login';
 import Register from './views/User/Register';
 import UserPage from './views/User/UserPage';
+import JobPostPage from './views/JobPosts/JobPostPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs/all" element={<AllJobPosts />} />
+        <Route path="/job/:jobId" element={<JobPostPage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/user/:userId" element={<UserPage/>} />
