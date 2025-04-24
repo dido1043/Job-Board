@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../../assets/UserPage.css';
+
 const UserPage = () => {
 
   const [seniority, setSeniority] = useState();
@@ -18,7 +19,9 @@ const UserPage = () => {
   });
 
 
-  const [isBecameRecruiter, setIsBecomeRecruiter] = useState(false);
+  const [isBecomeRecruiter, setIsBecomeRecruiter] = useState(false);
+  const [isSetSeniority] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -80,8 +83,10 @@ const UserPage = () => {
           'Accept': '*/*'
         }
       });
+      isSetSeniority(true);
       console.log(response.data);
       if (response.data !== seniority) {
+        
         setSeniority(response.data);
       }
     } catch (error) {
@@ -187,12 +192,15 @@ const UserPage = () => {
           <div className="d-flex gap-2 mt-2">
 
             <BaseButton text="Set Seniority" type="button" onClick={addSeniorityToUser} />
-
+           
           </div>
+           {isSetSeniority ? <div className="alert alert-success" role="alert">
+              Now you are {seniority}
+            </div> : <></>}
         </div>
         <div className="become-recruiter-s mb-3 d-flex gap-2">
           <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter} />
-          {isBecameRecruiter ? <div class="alert alert-success" role="alert">
+          {isBecomeRecruiter ? <div className="alert alert-success" role="alert">
             You are now a recruiter
           </div> : <></>}
         </div>
@@ -209,12 +217,7 @@ const UserPage = () => {
           />
           <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
         </div> : <></>}
-        <BaseButton text="Delete me" type="button" className="btn btn-danger" onClick={deleteUser} />
-        {error.message && (
-          <div className="alert alert-danger mt-3" role="alert">
-            {error.message}
-          </div>
-        )}
+        <button type="button" className="btn btn-danger" onClick={deleteUser}>Delete me</button>
       </form>
       <br />
     </div>
