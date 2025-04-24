@@ -1,6 +1,10 @@
+.navbar{
+    background: linear-gradient(to right, #2030e0, #FFF);
+}
+
 .username {
     position: absolute;
     right: 0;
-    top: 0; /* Adjust as needed */
+    top: 0; 
     font-weight: bold;
 }
