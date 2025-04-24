@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 const AllJobPosts = () => {
     const [jobs, setJobs] = useState([]);
@@ -7,6 +8,7 @@ const AllJobPosts = () => {
         message: ''
     });
 
+    const nav = useNavigate();
     useEffect(() => {
 
         const showJobs = async () => {
@@ -29,18 +31,25 @@ const AllJobPosts = () => {
         showJobs()
     }, [])
 
+    const redirectToCurrentJob = (jobId) => {
+        nav(`/job/${jobId}`);
+    };
+
+
     return (
-        <div class="container my-5">
-            <h1 class="text-center">All Job Posts</h1>
-            <p class="text-center">Find your dream job here!</p>
-            <div class="container my-5">
-                <div class="row justify-content-center">
+        <div className="container my-5">
+            <h1 className="text-center">All Job Posts</h1>
+            <p className="text-center">Find your dream job here!</p>
+            <div className="container my-5">
+                <div className="row justify-content-center">
                     {jobs.map((job) => (
-                        <div class="row-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{job.title}</h5>
-                                    <p class="card-text text-muted">📍{job.location}</p>
+                        <div className="row-md-6" key={job.id}>
+                            <div className="card mb-3"
+                                onClick={redirectToCurrentJob.bind(null, job.id)}
+                                style={{ cursor: "pointer" }}>
+                                <div className="card-body">
+                                    <h5 className="card-title">{job.title}</h5>
+                                    <p className="card-text text-muted">📍{job.location}</p>
                                 </div>
                             </div>
                         </div>
@@ -48,8 +57,6 @@ const AllJobPosts = () => {
                 </div>
             </div>
         </div>
-
-
     );
 }
 
