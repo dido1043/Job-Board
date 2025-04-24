@@ -6,7 +6,7 @@ const AllJobPosts = () => {
     const [error, setError] = useState({
         message: ''
     });
-    
+
     useEffect(() => {
 
         const showJobs = async () => {
@@ -20,7 +20,7 @@ const AllJobPosts = () => {
 
                 setJobs(response.data)
             } catch (err) {
-               setError({
+                setError({
                     message: 'Error fetching jobs'
                 });
             }
@@ -30,23 +30,26 @@ const AllJobPosts = () => {
     }, [])
 
     return (
-        <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {Array.isArray(jobs) && jobs.map((job, index) => (
-                    <div className="col">
-                        <div className="card shadow-sm">
-                            <h5>{job.title}</h5>
-                            <div className="card-body">
-                                <p className="card-text">{job.description}</p>
-                                <div className="d-flex justify-content-between align-items-center">
-                                   
+        <div class="container my-5">
+            <h1 class="text-center">All Job Posts</h1>
+            <p class="text-center">Find your dream job here!</p>
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    {jobs.map((job) => (
+                        <div class="row-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{job.title}</h5>
+                                    <p class="card-text text-muted">📍{job.location}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
+
+
     );
 }
 
