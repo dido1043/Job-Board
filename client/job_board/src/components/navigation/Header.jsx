@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BaseButton from '../shared/BaseButton';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../assets/headerStyle.css';
@@ -7,11 +7,12 @@ const Header = () => {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
     //const [role, setRole] = useState(() => localStorage.getItem("role"));
 
+    const redirect = useNavigate();
     const LogoutFn = () => {
         localStorage.clear();
         setToken(null);
+        redirect('/');
         window.location.reload();
-        Navigate('/');
         console.log("Logout function called");
     }
     return (

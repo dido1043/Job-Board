@@ -3,6 +3,8 @@ import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import '../../assets/UserPage.css';
 const UserPage = () => {
 
   const [seniority, setSeniority] = useState();
@@ -14,6 +16,9 @@ const UserPage = () => {
   const [error, setError] = useState({
     message: ''
   });
+
+
+  const [isBecameRecruiter, setIsBecomeRecruiter] = useState(false);
 
   const navigate = useNavigate();
 
@@ -112,15 +117,16 @@ const UserPage = () => {
   //Become recruiter
   const becomeRecruiter = async (e) => {
     try {
-        const response = await axios.post(`http://localhost:8080/user/become-recruiter/${userId}`, null, {
-          headers:{
-            'Content-Type': 'application/json',
-            'Accept': '*/*'
-          }
-        });
-        localStorage.setItem('userRole', response.data);
-        setUserRole(response.data);
-        
+      const response = await axios.post(`http://localhost:8080/user/become-recruiter/${userId}`, null, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        }
+      });
+      setIsBecomeRecruiter(true);
+      localStorage.setItem('userRole', response.data);
+      setUserRole(response.data);
+
     } catch (error) {
       setError({
         message: 'Error making user recruiter'
@@ -129,9 +135,9 @@ const UserPage = () => {
   }
   //Delete user
   const deleteUser = async (e) => {
-    try{
+    try {
       const response = await axios.delete(`http://localhost:8080/user/delete/${userId}`, null, {
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
         }
@@ -145,7 +151,7 @@ const UserPage = () => {
       setCandidateForAdmin(null);
       navigate('/login');
       window.location.reload();
-    }catch(error){
+    } catch (error) {
       setError({
         message: 'Error deleting user'
       });
@@ -184,8 +190,11 @@ const UserPage = () => {
 
           </div>
         </div>
-        <div className="mb-3 d-flex gap-2">
-          <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter}/>
+        <div className="become-recruiter-s mb-3 d-flex gap-2">
+          <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter} />
+          {isBecameRecruiter ? <div class="alert alert-success" role="alert">
+            You are now a recruiter
+          </div> : <></>}
         </div>
         {localStorage.getItem('userRole') === 'ADMIN' ? <div>
           <InputField
@@ -200,10 +209,14 @@ const UserPage = () => {
           />
           <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
         </div> : <></>}
-        <BaseButton text="Delete me" type="button" className="btn btn-danger" onClick={deleteUser}/>
-        
+        <BaseButton text="Delete me" type="button" className="btn btn-danger" onClick={deleteUser} />
+        {error.message && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {error.message}
+          </div>
+        )}
       </form>
-      <br/>
+      <br />
     </div>
   );
 }
