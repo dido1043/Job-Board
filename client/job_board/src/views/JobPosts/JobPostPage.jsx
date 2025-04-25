@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import BaseButton from '../../components/shared/BaseButton';
+
 import '../../assets/jobPostPage.css';
 const JobPostPage = () => {
     const [id, setId] = useState(window.location.pathname.split('/').pop());
@@ -54,6 +56,9 @@ const JobPostPage = () => {
             </p>
   
             <p className="mt-3">{jobPost.description}</p>
+
+            <BaseButton text="Apply" type="button" onClick={() => {console.log('Apply button clicked!');
+            }}/>
           </div>
         </div>
       </div>
