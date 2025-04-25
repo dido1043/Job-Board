@@ -1,0 +1,11 @@
+.job-card {
+    max-width: 500px;
+    border-radius: 15px;
+    background-color: #fdfdfd;
+    transition: transform 0.3s ease;
+  }
+  
+  .job-card:hover {
+    transform: scale(1.02);
+  }
+  
