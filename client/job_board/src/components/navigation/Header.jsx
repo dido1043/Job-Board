@@ -34,10 +34,15 @@ const Header = () => {
                         {token != null ?
                             <>
                                 <li className="nav-item">
+                                    <Link className="nav-link" to="/jobs/create">Create Job</Link>
+                                </li>
+
+                                <li className="nav-item">
                                     <BaseButton text="Logout" type="button" onClick={() => LogoutFn()} />
                                 </li>
                             </> :
                             <>
+
                                 <li>
                                     <Link className="nav-link" to="/login">Login</Link>
                                 </li>
