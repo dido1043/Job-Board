@@ -7,9 +7,28 @@ const JobPostPage = () => {
     const [id, setId] = useState(window.location.pathname.split('/').pop());
 
     const [jobPost, setJobPost] = useState({});
+
+    const [recruier, setRecruiter] = useState();
+
     const [error, setError] = useState({
         message: ''
     });
+
+    const getRecruiter = async (recruiterId) => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user/get-username/${recruiterId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          }
+        });
+        setRecruiter(response.data);
+      } catch (error) {
+        setError({
+          message: 'Error fetching recruiter details'
+        });
+      }
+    }
     //Fetch the job post details using the id
     useEffect(() => {
         console.log(id);
@@ -23,6 +42,7 @@ const JobPostPage = () => {
                     }
                 });
                 setJobPost(response.data);
+                await getRecruiter(response.data.recruiterId);
             } catch (err) {
                 setError({
                     message: 'Error fetching job post'
@@ -48,7 +68,7 @@ const JobPostPage = () => {
             </p>
   
             <p className="text-muted">
-              💼 <span className="fw-semibold">{jobPost.recruiterId}</span>
+              💼 <span className="fw-semibold">{recruier}</span>
             </p>
   
             <p className="text-muted">
@@ -57,6 +77,9 @@ const JobPostPage = () => {
   
             <p className="mt-3">{jobPost.description}</p>
 
+            <p className="text-muted">Skills: {jobPost.skills && jobPost.skills.map((skill, index) => (
+                <span key={index} className="badge bg-secondary me-1">{skill}</span>
+            ))}</p>
             <BaseButton text="Apply" type="button" onClick={() => {console.log('Apply button clicked!');
             }}/>
           </div>
