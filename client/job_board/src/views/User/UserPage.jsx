@@ -162,6 +162,10 @@ const UserPage = () => {
       });
     }
   }
+
+  const redirectToRecommendedJobs = (userId) => {
+    navigate(`/jobs/recommended/${userId}`);
+  }
   return (
     <div className="container mt-5">
       <h1 className="text-center">Hello <span className="text text-primary">{localStorage.getItem('username')}</span>!</h1>
@@ -175,6 +179,9 @@ const UserPage = () => {
             </div> : <></>
           }
           <BaseButton text="Add skill" type="submit" onClick={addSkillsToUser} />
+        </div>
+        <div className="mb-3">
+        <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
         </div>
         <div className="mb-3">
           <label htmlFor="seniority" className="form-label">Set Seniority:</label>

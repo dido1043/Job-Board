@@ -11,6 +11,7 @@ import Register from './views/User/Register';
 import UserPage from './views/User/UserPage';
 import JobPostPage from './views/JobPosts/JobPostPage';
 import CreateJobPost from './views/JobPosts/CreateJobPost';
+import RecommendedJobs from './views/JobPosts/RecomendedJobs';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs/all" element={<AllJobPosts />} />
+        <Route path="/jobs/recommended/:userId" element={<RecommendedJobs />} />
         <Route path="/jobs/create" element={<CreateJobPost/>}/>
         <Route path="/job/:jobId" element={<JobPostPage/>}/>
         <Route path="/login" element={<Login />} />
