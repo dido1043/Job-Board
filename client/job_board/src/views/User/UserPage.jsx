@@ -164,7 +164,7 @@ const UserPage = () => {
   }
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Hello <span className="text text-primary">{localStorage.getItem('username')}</span></h1>
+      <h1 className="text-center">Hello <span className="text text-primary">{localStorage.getItem('username')}</span>!</h1>
       <form>
         <div className="mb-3">
           <InputField label="Add Skill:" type="text" name="skills" id="skills" onChange={handleSkillsChange} className="form-control" placeholder="Enter skill" />
