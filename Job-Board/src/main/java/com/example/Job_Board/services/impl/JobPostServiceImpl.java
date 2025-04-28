@@ -3,9 +3,11 @@ package com.example.Job_Board.services.impl;
 import com.example.Job_Board.models.dtos.jpDto.JobPostDto;
 import com.example.Job_Board.models.entity.JobPost;
 import com.example.Job_Board.models.entity.User;
+import com.example.Job_Board.repository.ApplicationRepository;
 import com.example.Job_Board.repository.JobPostRepository;
 import com.example.Job_Board.repository.UserRepository;
 import com.example.Job_Board.services.JobPostService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +18,16 @@ import java.util.Set;
 public class JobPostServiceImpl implements JobPostService {
     private final JobPostRepository jobPostRepository;
     private final UserRepository userRepository;
-
+    private final ApplicationRepository applicationRepository;
     private static final Set<String> VALID_SENIORITIES = Set.of(
             "Intern", "Junior", "Mid", "Senior"
     );
 
     @Autowired
-    public JobPostServiceImpl(JobPostRepository jobPostRepository, UserRepository userRepository) {
+    public JobPostServiceImpl(JobPostRepository jobPostRepository, UserRepository userRepository, ApplicationRepository applicationRepository) {
         this.jobPostRepository = jobPostRepository;
         this.userRepository = userRepository;
+        this.applicationRepository = applicationRepository;
     }
 
 
@@ -52,11 +55,12 @@ public class JobPostServiceImpl implements JobPostService {
         JobPost updatedJobPost = jobPostRepository.save(jobPost);
         return convertToDTO(updatedJobPost);
     }
-
+    @Transactional
     @Override
     public String deleteJobPost(Long id) {
         JobPost jobPost = jobPostRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invalid job post"));
+        applicationRepository.deleteByJobPostId(jobPost.getId());
         jobPostRepository.delete(jobPost);
         return "Deleted successfully";
     }

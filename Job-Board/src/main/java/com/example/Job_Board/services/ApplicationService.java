@@ -11,4 +11,5 @@ public interface ApplicationService {
     List<ApplicationDto> getApplicationsByJobPostId(Long jobPostId);
     List<ApplicationDto> getApplicationsByApplicantId(Long applicantId);
     String deleteApplication(Long id);
+
 }
