@@ -98,15 +98,17 @@ const JobPostPage = () => {
               </p>
 
               <p className="text-muted">
-                💰 <span className="fw-semibold">{jobPost.salary}</span>
+                💰 <span className="fw-semibold">{jobPost.salary} bgn</span>
               </p>
-
+              <p className="text-muted">
+              💻 <span className="fw-semibold">{jobPost.seniority}</span>
+              </p>
               <p className="mt-3">{jobPost.description}</p>
 
               <p className="text-muted">Skills: {jobPost.skills && jobPost.skills.map((skill, index) => (
                 <span key={index} className="badge bg-secondary me-1">{skill}</span>
               ))}</p>
-              <BaseButton text="Apply" type="button" onClick={() => { console.log('Apply button clicked!'); }} />
+              
 
               {localStorage.getItem('username') === recruier ?
                 <div className="mt-3">
@@ -114,7 +116,9 @@ const JobPostPage = () => {
 
                   <button type='button' className="btn btn-danger mt-3" onClick={deleteJobPost}>Delete</button>
                 </div> :
-                <></>}
+                <>
+                <BaseButton text="Apply" type="button" onClick={() => { console.log('Apply button clicked!'); }} />
+                </>}
             </div>
 
           </div>
