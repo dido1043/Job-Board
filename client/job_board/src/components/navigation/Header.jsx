@@ -7,14 +7,7 @@ const Header = () => {
     const [token, setToken] = useState(() => localStorage.getItem("token"))
     //const [role, setRole] = useState(() => localStorage.getItem("role"));
 
-    const redirect = useNavigate();
-    const LogoutFn = () => {
-        localStorage.clear();
-        setToken(null);
-        redirect('/');
-        window.location.reload();
-        console.log("Logout function called");
-    }
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -37,9 +30,7 @@ const Header = () => {
                                     <Link className="nav-link" to="/jobs/create">Create Job</Link>
                                 </li>
 
-                                <li className="nav-item">
-                                    <BaseButton text="Logout" type="button" onClick={() => LogoutFn()} />
-                                </li>
+                              
                             </> :
                             <>
 

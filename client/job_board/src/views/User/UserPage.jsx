@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
 import { useNavigate } from 'react-router-dom';
@@ -85,10 +85,10 @@ const UserPage = () => {
       });
       isSetSeniority(true);
       console.log(response.data);
-      if (response.data !== seniority) {
-        
-        setSeniority(response.data);
-      }
+      // if (response.data !== seniority) {
+
+      //   //setSeniority(response.data);
+      // }
     } catch (error) {
       setError({
         message: 'Error adding seniority to user'
@@ -96,6 +96,7 @@ const UserPage = () => {
     }
 
   }
+
   //Make user admin 
   const makeAdmin = async (e) => {
     e.preventDefault();
@@ -138,6 +139,28 @@ const UserPage = () => {
       });
     }
   }
+  useEffect(() => {
+    const getUserSeniority = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user/get-seniority/${userId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          }
+        });
+        console.log(response.data);
+        
+        setSeniority(response.data);
+      } catch (error) {
+        setError({
+          message: 'Error fetching user seniority'
+        });
+      }
+      
+    }
+    getUserSeniority();
+  }, [])
+
   //Delete user
   const deleteUser = async (e) => {
     try {
@@ -166,22 +189,33 @@ const UserPage = () => {
   const redirectToRecommendedJobs = (userId) => {
     navigate(`/jobs/recommended/${userId}`);
   }
+  const LogoutFn = () => {
+    localStorage.clear();
+    // setToken(null);
+    navigate('/');
+    window.location.reload();
+    console.log("Logout function called");
+  }
   return (
     <div className="container mt-5">
       <h1 className="text-center">Hello <span className="text text-primary">{localStorage.getItem('username')}</span>!</h1>
+
+      <div className="user-info-box mb-4 p-3 border rounded">
+        <h3>User Information</h3>
+        <p><strong>Username:</strong> {localStorage.getItem('username')}</p>
+        <p><strong>User ID:</strong> {userId}</p>
+        <p><strong>Role:</strong> {localStorage.getItem('userRole')}</p>
+        <p><strong>Seniority:</strong> {seniority}</p>
+        <p><strong>Skills:</strong> {allSkills.length > 0 ? allSkills.join(', ') : 'No skills added'}</p> 
+      </div>
       <form>
         <div className="mb-3">
           <InputField label="Add Skill:" type="text" name="skills" id="skills" onChange={handleSkillsChange} className="form-control" placeholder="Enter skill" />
 
-          {allSkills.length > 0 ?
-            <div className="mt-2">
-              <p>Skills: {allSkills.map(s => <li>{s}</li>)}</p>
-            </div> : <></>
-          }
           <BaseButton text="Add skill" type="submit" onClick={addSkillsToUser} />
         </div>
         <div className="mb-3">
-        <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
+          <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
         </div>
         <div className="mb-3">
           <label htmlFor="seniority" className="form-label">Set Seniority:</label>
@@ -191,7 +225,7 @@ const UserPage = () => {
             onChange={seniorityOnChange}
             value={seniority}
           >
-            <option value="" disabled selected>Select seniority</option>
+            <option value="" disabled defaultValue={seniority}>Select seniority</option>
             <option value="Intern">Intern</option>
             <option value="Junior">Junior</option>
             <option value="Mid">Mid</option>
@@ -200,11 +234,11 @@ const UserPage = () => {
           <div className="d-flex gap-2 mt-2">
 
             <BaseButton text="Set Seniority" type="button" onClick={addSeniorityToUser} />
-           
+
           </div>
-           {isSetSeniority ? <div className="alert alert-success" role="alert">
-              Now you are {seniority}
-            </div> : <></>}
+          {isSetSeniority ? <div className="alert alert-success" role="alert">
+            Now you are {seniority}
+          </div> : <></>}
         </div>
         <div className="become-recruiter-s mb-3 d-flex gap-2">
           <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter} />
@@ -225,7 +259,9 @@ const UserPage = () => {
           />
           <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
         </div> : <></>}
-        <button type="button" className="btn btn-danger" onClick={deleteUser}>Delete me</button>
+        <button type="button" className="btn btn-danger mt-2" onClick={LogoutFn}>Logout</button>
+
+        <button type="button" className="btn btn-danger mt-2" onClick={deleteUser}>Delete me</button>
       </form>
       <br />
     </div>
