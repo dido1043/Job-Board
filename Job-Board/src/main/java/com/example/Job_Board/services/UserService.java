@@ -13,5 +13,6 @@ public interface UserService {
     String becomeRecruiter(Long id);
     Long findUserByEmail(String email);
     String getUsername(Long id);
+    String getUserSeniority(Long id);
     String deleteUser(Long id);
 }

@@ -94,6 +94,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getUserSeniority(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getSeniority();
+    }
+
+    @Override
     public String deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -101,7 +109,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
         return "User is deleted";
     }
-
     private boolean IsValidSeniority(String seniority){
         return VALID_SENIORITIES.contains(seniority);
     }

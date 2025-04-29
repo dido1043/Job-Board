@@ -27,6 +27,9 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 20)
     private String role = "JOB_SEEKER"; // 'JOB_SEEKER' or 'RECRUITER'
 
+    @Column
+    private String location;
+
     @Column(length = 20)
     private String seniority = "";
 
@@ -123,6 +126,14 @@ public class User implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getSeniority() {

@@ -141,7 +141,7 @@ public class JobPostServiceImpl implements JobPostService {
     }
 
     private boolean isMatchJob(User user, JobPost jobPost){
-        return jobPost.getSeniority().equals(user.getSeniority()) &&
+        return jobPost.getSeniority().equals(user.getSeniority()) ||
                 jobPost.getSkills().stream().anyMatch(s -> user.getSkills().contains(s));
     }
 }

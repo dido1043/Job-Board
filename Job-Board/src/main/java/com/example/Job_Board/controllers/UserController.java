@@ -51,6 +51,10 @@ public class UserController {
     public ResponseEntity<?> getUsername(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsername(id));
     }
+    @GetMapping("/get-seniority/{id}")
+    public ResponseEntity<?> getSeniority(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserSeniority(id));
+    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(id));
