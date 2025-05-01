@@ -30,7 +30,23 @@ const AllJobPosts = () => {
         }
         showJobs()
     }, [])
-
+    const filterJobsBySeniority = async (seniority) => {
+       try {
+            const response = await axios.get(`http://localhost:8080/post/filter/${seniority}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            });
+            setJobs(response.data);
+        console.log(response.data);
+       } catch (error) {
+        setError({
+            message: 'Error filtering jobs'
+        });
+       }
+    }
+    
     const redirectToCurrentJob = (jobId) => {
         nav(`/job/${jobId}`);
     };
@@ -40,6 +56,14 @@ const AllJobPosts = () => {
         <div className="container my-5">
             <h1 className="text-center">All Job Posts</h1>
             <p className="text-center">Find your dream job here!</p>
+
+            <div className="text-center my-3">
+                <div className="btn-group" role="group" aria-label="Seniority Filter">
+                    <button type="button" className="btn btn-outline-primary" onClick={() => filterJobsBySeniority("Junior")}>Junior</button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={() => filterJobsBySeniority("Mid")}>Mid</button>
+                    <button type="button" className="btn btn-outline-success" onClick={() => filterJobsBySeniority("Senior")}>Senior</button>
+                </div>
+            </div>
             <div className="container my-5">
                 <div className="row justify-content-center">
                     {jobs.map((job) => (
