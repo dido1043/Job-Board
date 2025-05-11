@@ -46,7 +46,9 @@ const AllJobPosts = () => {
         });
        }
     }
-    
+    const resetFilter = async () => {
+        window.location.reload();
+    }
     const redirectToCurrentJob = (jobId) => {
         nav(`/job/${jobId}`);
     };
@@ -54,30 +56,40 @@ const AllJobPosts = () => {
 
     return (
         <div className="container my-5">
-            <h1 className="text-center">All Job Posts</h1>
-            <p className="text-center">Find your dream job here!</p>
+            <h1 className="text-center display-4"> 💸All Job Posts💸 </h1>
+            <p className="text-center lead">Find your dream job here and take the next step in your career!</p>
 
-            <div className="text-center my-3">
+            <div className="text-center my-4">
+                <h4 className="mb-3">Filter by Seniority</h4>
                 <div className="btn-group" role="group" aria-label="Seniority Filter">
-                    <button type="button" className="btn btn-outline-primary" onClick={() => filterJobsBySeniority("Junior")}>Junior</button>
-                    <button type="button" className="btn btn-outline-secondary" onClick={() => filterJobsBySeniority("Mid")}>Mid</button>
-                    <button type="button" className="btn btn-outline-success" onClick={() => filterJobsBySeniority("Senior")}>Senior</button>
+                    <button type="button" className="btn btn-primary" onClick={() => filterJobsBySeniority("Junior")}>Junior</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => filterJobsBySeniority("Mid")}>Mid</button>
+                    <button type="button" className="btn btn-success" onClick={() => filterJobsBySeniority("Senior")}>Senior</button>
                 </div>
+                <br />
+                <button type="button" className="btn btn-danger mt-3" onClick={() => resetFilter()}>Reset Filters</button>
             </div>
+
             <div className="container my-5">
                 <div className="row justify-content-center">
-                    {jobs.map((job) => (
-                        <div className="row-md-6" key={job.id}>
-                            <div className="card mb-3"
-                                onClick={redirectToCurrentJob.bind(null, job.id)}
-                                style={{ cursor: "pointer" }}>
-                                <div className="card-body">
-                                    <h5 className="card-title">{job.title}</h5>
-                                    <p className="card-text text-muted">📍{job.location}</p>
+                    {jobs.length > 0 ? (
+                        jobs.map((job) => (
+                            <div className="col-md-6 col-lg-4" key={job.id}>
+                                <div className="card mb-4 shadow-sm"
+                                    onClick={redirectToCurrentJob.bind(null, job.id)}
+                                    style={{ cursor: "pointer", borderRadius: "10px" }}>
+                                    <div className="card-body">
+                                        <h5 className="card-title text-primary">{job.title}</h5>
+                                        <p className="card-text text-muted">📍 {job.location}</p>
+                                    </div>
                                 </div>
                             </div>
+                        ))
+                    ) : (
+                        <div className="text-center">
+                            <p className="text-muted">No job posts available. Please try again later.</p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>

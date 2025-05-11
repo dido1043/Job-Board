@@ -78,6 +78,10 @@ const JobPostPage = () => {
 
     }
   }
+
+  const redirectToPostResume = () => {
+    nav('/resume/post');
+  }
   return (
     <div>
       {!isEditBtn ?
@@ -117,7 +121,7 @@ const JobPostPage = () => {
                   <button type='button' className="btn btn-danger mt-3" onClick={deleteJobPost}>Delete</button>
                 </div> :
                 <>
-                <BaseButton text="Apply" type="button" onClick={() => { console.log('Apply button clicked!'); }} />
+                <BaseButton text="Apply" type="button" onClick={() => redirectToPostResume()} />
                 </>}
             </div>
 
