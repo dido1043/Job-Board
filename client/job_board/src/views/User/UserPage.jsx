@@ -12,8 +12,10 @@ const UserPage = () => {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
+  const [username, setUsername] = useState(localStorage.getItem('username')); 
   const [userRole, setUserRole] = useState();
   const [candidateForAdmin, setCandidateForAdmin] = useState();
+   const [activeSection, setActiveSection] = useState('info');
   const [error, setError] = useState({
     message: ''
   });
@@ -197,73 +199,134 @@ const UserPage = () => {
     console.log("Logout function called");
   }
   return (
-    <div className="container mt-5">
-      <h1 className="text-center">Hello <span className="text text-primary">{localStorage.getItem('username')}</span>!</h1>
+       <div className="d-flex min-vh-100">
+      <aside className="bg-light p-3 border-end shadow-sm" style={{ width: '250px', minHeight: '100vh' }}>
+        <h4 className="text-primary mb-4">Dashboard</h4>
+        <ul className="nav flex-column">
+          <li className="nav-item mb-2">
+            <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('info')}>
+              <i className="bi bi-person-circle me-2"></i>User Info
+            </button>
+          </li>
+          <li className="nav-item mb-2">
+            <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('skills')}>
+              <i className="bi bi-tools me-2"></i>Skills
+            </button>
+          </li>
+          <li className="nav-item mb-2">
+            <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('seniority')}>
+              <i className="bi bi-bar-chart-line me-2"></i>Seniority
+            </button>
+          </li>
+          <li className="nav-item mb-2">
+            <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('jobs')}>
+              <i className="bi bi-briefcase me-2"></i>Recommended Jobs
+            </button>
+          </li>
+          {localStorage.getItem('userRole') === 'ADMIN' && (
+            <li className="nav-item mb-2">
+              <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('admin')}>
+                <i className="bi bi-shield-lock me-2"></i>Admin Panel
+              </button>
+            </li>
+          )}
+          <li className="nav-item mb-2">
+            <button className="btn btn-danger w-100 fw-bold" onClick={LogoutFn}>
+              <i className="bi bi-box-arrow-right me-2"></i>Logout
+            </button>
+          </li>
+          <li className="nav-item mt-3">
+            <button className="btn btn-outline-danger w-100 fw-bold" onClick={deleteUser}>
+              <i className="bi bi-trash me-2"></i>Delete Me
+            </button>
+          </li>
+        </ul>
+      </aside>
 
-      <div className="user-info-box mb-4 p-3 border rounded">
-        <h3>User Information</h3>
-        <p><strong>Username:</strong> {localStorage.getItem('username')}</p>
-        <p><strong>User ID:</strong> {userId}</p>
-        <p><strong>Role:</strong> {localStorage.getItem('userRole')}</p>
-        <p><strong>Seniority:</strong> {seniority}</p>
-        <p><strong>Skills:</strong> {allSkills.length > 0 ? allSkills.join(', ') : 'No skills added'}</p> 
-      </div>
-      <form>
-        <div className="mb-3">
-          <InputField label="Add Skill:" type="text" name="skills" id="skills" onChange={handleSkillsChange} className="form-control" placeholder="Enter skill" />
+      <main className="flex-grow-1 p-4">
+        <h1>Hello <span className="text-primary">{username}</span>!</h1>
 
-          <BaseButton text="Add skill" type="submit" onClick={addSkillsToUser} />
-        </div>
-        <div className="mb-3">
-          <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="seniority" className="form-label">Set Seniority:</label>
-          <select
-            id="seniority"
-            className="form-select"
-            onChange={seniorityOnChange}
-            value={seniority}
-          >
-            <option value="" disabled defaultValue={seniority}>Select seniority</option>
-            <option value="Intern">Intern</option>
-            <option value="Junior">Junior</option>
-            <option value="Mid">Mid</option>
-            <option value="Senior">Senior</option>
-          </select>
-          <div className="d-flex gap-2 mt-2">
-
-            <BaseButton text="Set Seniority" type="button" onClick={addSeniorityToUser} />
-
+        {activeSection === 'info' && (
+          <div className="user-info-box mb-4 p-3 border rounded">
+            <h3>User Information</h3>
+            <p><strong>Username:</strong> {username}</p>
+            <p><strong>User ID:</strong> {userId}</p>
+            <p><strong>Role:</strong> {localStorage.getItem('userRole')}</p>
+            <p><strong>Seniority:</strong> {seniority}</p>
+            <p><strong>Skills:</strong> {allSkills.length > 0 ? allSkills.join(', ') : 'No skills added'}</p>
           </div>
-          {isSetSeniority ? <div className="alert alert-success" role="alert">
-            Now you are {seniority}
-          </div> : <></>}
-        </div>
-        <div className="become-recruiter-s mb-3 d-flex gap-2">
-          <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter} />
-          {isBecomeRecruiter ? <div className="alert alert-success" role="alert">
-            You are now a recruiter
-          </div> : <></>}
-        </div>
-        {localStorage.getItem('userRole') === 'ADMIN' ? <div>
-          <InputField
-            label="User id:"
-            type="text"
-            name="userId"
-            id="userId"
-            value={candidateForAdmin}
-            onChange={handleCandidateIdChange}
-            className="form-control"
-            placeholder="Enter user id"
-          />
-          <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
-        </div> : <></>}
-        <button type="button" className="btn btn-danger mt-2" onClick={LogoutFn}>Logout</button>
+        )}
 
-        <button type="button" className="btn btn-danger mt-2" onClick={deleteUser}>Delete me</button>
-      </form>
-      <br />
+        {activeSection === 'skills' && (
+          <form onSubmit={addSkillsToUser}>
+            <InputField
+              label="Add Skill:"
+              type="text"
+              name="skills"
+              id="skills"
+              onChange={handleSkillsChange}
+              className="form-control"
+              placeholder="Enter skill"
+            />
+            <BaseButton text="Add skill" type="submit" />
+          </form>
+        )}
+
+        {activeSection === 'seniority' && (
+          <div>
+            <label htmlFor="seniority" className="form-label">Set Seniority:</label>
+            <select
+              id="seniority"
+              className="form-select"
+              onChange={seniorityOnChange}
+              value={seniority}
+            >
+              <option value="" disabled>Select seniority</option>
+              <option value="Intern">Intern</option>
+              <option value="Junior">Junior</option>
+              <option value="Mid">Mid</option>
+              <option value="Senior">Senior</option>
+            </select>
+            <div className="mt-2">
+              <BaseButton text="Set Seniority" type="button" onClick={addSeniorityToUser} />
+            </div>
+            {isSetSeniority && (
+              <div className="alert alert-success mt-2" role="alert">
+                Now you are {seniority}
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeSection === 'jobs' && (
+          <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
+        )}
+
+        {activeSection === 'admin' && localStorage.getItem('userRole') === 'ADMIN' && (
+          <div>
+            <InputField
+              label="User id:"
+              type="text"
+              name="userId"
+              id="userId"
+              value={candidateForAdmin}
+              onChange={handleCandidateIdChange}
+              className="form-control"
+              placeholder="Enter user id"
+            />
+            <BaseButton text="Make admin" type="button" onClick={makeAdmin} />
+          </div>
+        )}
+
+        <div className="mt-3">
+          <BaseButton text="Become recruiter" type="button" onClick={becomeRecruiter} />
+          {isBecomeRecruiter && (
+            <div className="alert alert-success mt-2" role="alert">
+              You are now a recruiter
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }
