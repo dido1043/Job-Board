@@ -23,6 +23,11 @@ public class ResumeController {
         return ResponseEntity.status(HttpStatus.OK).body(resumeService.getResumeById(id));
     }
 
+    @GetMapping("/get-by-userId/{id}")
+    public ResponseEntity<?> getByJobSeekerId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(resumeService.getByJobSeekerId(id));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> allResumes() {
         return ResponseEntity.status(HttpStatus.OK).body(resumeService.getAllResumes());
@@ -39,7 +44,7 @@ public class ResumeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteResume(@PathVariable Long id){
+    public ResponseEntity<?> deleteResume(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(resumeService.deleteResume(id));
     }
 }

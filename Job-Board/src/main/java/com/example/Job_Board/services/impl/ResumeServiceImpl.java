@@ -42,6 +42,15 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
+    public List<ResumeDto> getByJobSeekerId(Long id) {
+        List<Resume> resumeList = resumeRepository.findByJobSeekerId(id);
+
+        return resumeList.stream()
+                .map(this::convertToDto)
+                .toList();
+    }
+
+    @Override
     public ResumeDto updateResume(Long id, ResumeDto resumeDto) {
         Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Inavlid resume"));
