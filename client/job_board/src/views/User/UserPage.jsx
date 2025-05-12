@@ -304,6 +304,7 @@ const UserPage = () => {
 
         {activeSection === 'admin' && localStorage.getItem('userRole') === 'ADMIN' && (
           <div>
+            <h2 className='text-secondary'>Make admin</h2>
             <InputField
               label="User id:"
               type="text"
