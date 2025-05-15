@@ -18,7 +18,7 @@ const ShowResumes = () => {
 
 
             } catch (error) {
-                console.error('Error fetching resumes:', error);
+                console.log('Error fetching resumes:', error);
             }
         }
 
