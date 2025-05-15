@@ -12,10 +12,10 @@ const UserPage = () => {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
-  const [username, setUsername] = useState(localStorage.getItem('username')); 
+  const [username, setUsername] = useState(localStorage.getItem('username'));
   const [userRole, setUserRole] = useState();
   const [candidateForAdmin, setCandidateForAdmin] = useState();
-   const [activeSection, setActiveSection] = useState('info');
+  const [activeSection, setActiveSection] = useState('info');
   const [error, setError] = useState({
     message: ''
   });
@@ -151,14 +151,14 @@ const UserPage = () => {
           }
         });
         console.log(response.data);
-        
+
         setSeniority(response.data);
       } catch (error) {
         setError({
           message: 'Error fetching user seniority'
         });
       }
-      
+
     }
     getUserSeniority();
   }, [])
@@ -198,8 +198,12 @@ const UserPage = () => {
     window.location.reload();
     console.log("Logout function called");
   }
-  return (
-       <div className="d-flex min-vh-100">
+
+  const redirectToMyFiles = () => {
+    navigate(`/resume/show/${userId}`);
+  }
+    return (
+    <div className="d-flex min-vh-100">
       <aside className="bg-light p-3 border-end shadow-sm" style={{ width: '250px', minHeight: '100vh' }}>
         <h4 className="text-primary mb-4">Dashboard</h4>
         <ul className="nav flex-column">
@@ -221,6 +225,11 @@ const UserPage = () => {
           <li className="nav-item mb-2">
             <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => setActiveSection('jobs')}>
               <i className="bi bi-briefcase me-2"></i>Recommended Jobs
+            </button>
+          </li>
+          <li className="nav-item mb-2">
+            <button className="btn btn-link text-decoration-none text-dark fw-bold" onClick={() => redirectToMyFiles()}>
+              <i className="bi bi-briefcase me-2"></i> My files
             </button>
           </li>
           {localStorage.getItem('userRole') === 'ADMIN' && (
@@ -301,7 +310,7 @@ const UserPage = () => {
         {activeSection === 'jobs' && (
           <BaseButton text="Show recommended jobs" type="button" onClick={() => redirectToRecommendedJobs(userId)} />
         )}
-
+       
         {activeSection === 'admin' && localStorage.getItem('userRole') === 'ADMIN' && (
           <div>
             <h2 className='text-secondary'>Make admin</h2>
