@@ -14,7 +14,7 @@ public class Resume {
     @JoinColumn(name = "job_seeker_id", nullable = false)
     private User jobSeeker;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String filePath;
 
     @Column(nullable = false, updatable = false)
