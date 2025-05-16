@@ -56,13 +56,16 @@ const ShowResumes = () => {
     return (
         <div className='container mt-5 mb-5'>
             <h2 className='text-center mt-4 mb-5'>My Resumes</h2>
-            <div className="row">
-                {resumes.map((resume, index) => (
-                    <div className="col-md-4 mb-4" key={resume.id}>
+            <div className="col-md-12 w-100">
+                {resumes.map((resume) => (
+                    <div className="col-md-4 mb-4 w-100"  key={resume.id}>
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Document {index}</h5>
-                                <BaseButton onClick={() => downloadResume(resume)} text="View" />
+                                <h5 className="card-title">Document ID:{resume.id}</h5>
+                                <div className="buttons d-flex justify-content-between">
+                                    <BaseButton onClick={() => downloadResume(resume)} text="View file" />
+                                    <button className='btn btn-danger me-2' onClick={() => downloadResume(resume)} >Delete file</button>
+                                </div>
                             </div>
                         </div>
                     </div>
