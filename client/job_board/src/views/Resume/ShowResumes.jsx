@@ -65,18 +65,20 @@ const ShowResumes = () => {
             console.log('Error deleting resume:', error);
         }
     }
+
+   
     return (
         <div className='container mt-5 mb-5'>
             <h2 className='text-center mt-4 mb-5'>My Resumes</h2>
             <div className="col-md-12 w-100">
                 {resumes.map((resume) => (
-                    <div className="col-md-4 mb-4 w-100" key={resume.id}>
+                    <div className="col-md-4 mb-4 w-100" key={resume.id} style={{ gap: '1px' }}>
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Document ID:{resume.id}</h5>
-                                <div className="buttons d-flex justify-content-between">
+                                <div className="buttons d-flex justify-content-between" style={{ gap: '2px' }}>
                                     <BaseButton onClick={() => downloadResume(resume)} text="View file" />
-                                    <button className='btn btn-danger me-2' onClick={() => deleteResume(resume.id)} >Delete file</button>
+                                    <button className='btn btn-danger' onClick={() => deleteResume(resume.id)} >Delete file</button>
                                 </div>
                             </div>
                         </div>

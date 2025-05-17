@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState,  useEffect } from 'react';
 import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ const PostResume = () => {
 
   const nav = useNavigate();
 
+ 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -43,10 +44,25 @@ const PostResume = () => {
     }
 
   }
+
+  const editResume = async (resumeId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/resume/edit/${resumeId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        }
+      });
+
+    } catch (error) {
+      console.log('Error editing resume:', error);
+    }
+  }
+
   return (
-    <div className='container mt-5 mb-5'> 
-      <h2 className='text-center mt-4 mb-5'>Upload CV</h2>
-      <input className="form-control form-control-lg" id="formFileLg" type="file" onChange={handleFileChange} />
+    <div className='container mt-5 mb-5'>
+      <h2 className='text-center mt-4 mb-5'>Upload CV</h2>  {/* <input className="form-control form-control-lg" id="formFileLg" type="file" onChange={handleFileChange} /> */}
+      <InputField id="formFileLg" type="file" onChange={handleFileChange} />
       <div className="d-flex justify-content-center mt-4">
         <BaseButton text="Post Resume" onClick={handleSubmit} className="btn btn-primary" />
       </div>
