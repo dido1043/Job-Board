@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import BaseButton from '../../components/shared/BaseButton';
 import '../../assets/jobPostPage.css';
 import CreateJobPost from './CreateJobPost';
+import AllApplications from '../Application/AllApplications';
 const JobPostPage = () => {
   const [id, setId] = useState(window.location.pathname.split('/').pop());
 
@@ -117,8 +118,8 @@ const JobPostPage = () => {
               {localStorage.getItem('username') === recruier ?
                 <div className="mt-3">
                   <BaseButton text="Edit" type="button" onClick={toggleEditBtn} />
-
                   <button type='button' className="btn btn-danger mt-3" onClick={deleteJobPost}>Delete</button>
+                 
                 </div> :
                 <>
                 <BaseButton text="Apply" type="button" onClick={() => redirectToPostResume()} />
@@ -129,6 +130,8 @@ const JobPostPage = () => {
         </div> :
         <CreateJobPost isEditable={isEditBtn} jpData={jobPost} />
       }
+      {localStorage.getItem('username') === recruier ? <AllApplications jobId={id}/>
+      : <></>}
     </div>
 
   );
