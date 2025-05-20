@@ -45,9 +45,7 @@ const AllApplications = ({ jobId }) => {
 
         getApplications();
     }, [jobId]);
-    const getUsernames = async (applications) => {
-    
-    }
+
     return (
         <div className="container d-flex flex-column align-items-center justify-content-center mt-5">
             <h1 className="mb-4 text-center">All Applications</h1>
