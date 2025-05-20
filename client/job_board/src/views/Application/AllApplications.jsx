@@ -1,8 +1,10 @@
 import axios from 'axios';
-import React, { use } from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
+
 const AllApplications = ({ jobId }) => {
     const [applications, setApplications] = useState([]);
+    const [usernames, setUsernames] = useState({});
     const [errors, setErrors] = useState(null);
 
     useEffect(() => {
@@ -15,18 +17,37 @@ const AllApplications = ({ jobId }) => {
                     }
                 });
                 setApplications(response.data);
-                console.log(response.data);
+                
+                // Fetch usernames for all applications
+                await getUsernames(response.data);
+                const usernamesMap = {};
+                for (const application of response.data) {
+                    try {
+                        const userData = await axios.get(`http://localhost:8080/user/get-username/${application.jobSeekerId}`,
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': '*/*'
+                                }
+                            }
+                        );
+                        usernamesMap[application.jobSeekerId] = userData.data;
+                    } catch (error) {
+                        console.log('Error fetching user:', error);
+                        usernamesMap[application.jobSeekerId] = 'Unknown User';
+                    }
+                }
+                setUsernames(usernamesMap);
             } catch (error) {
                 setErrors(error);
             }
-
-        }
+        };
 
         getApplications();
-
     }, [jobId]);
-
+    const getUsernames = async (applications) => {
     
+    }
     return (
         <div className="container d-flex flex-column align-items-center justify-content-center mt-5">
             <h1 className="mb-4 text-center">All Applications</h1>
@@ -34,7 +55,7 @@ const AllApplications = ({ jobId }) => {
                 <ul className="list-group w-100" style={{ maxWidth: '600px' }}>
                     {applications.map((application) => (
                         <li key={application.id} className="list-group-item mb-3 shadow-sm">
-                            <p><strong>Applicant Name:</strong> {application.jobSeekerId}</p>
+                            <p><strong>Applicant Name:</strong> {usernames[application.jobSeekerId]}</p>
                             <p><strong>Resume:</strong> {application.resumeId}</p>
                             <p><strong>Status:</strong> {application.status}</p>
                         </li>
@@ -45,6 +66,6 @@ const AllApplications = ({ jobId }) => {
             )}
         </div>
     );
+};
 
-}
 export default AllApplications;
