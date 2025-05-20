@@ -25,6 +25,8 @@ public class Application {
     @JoinColumn(name = "resume_id", nullable = false)
     private Resume resume;
 
+    @Column(columnDefinition = "TEXT")
+    private String coverLetter;
     @PrePersist
     protected void onCreate() {
         applicationDate = LocalDateTime.now();
@@ -68,5 +70,13 @@ public class Application {
 
     public void setResume(Resume resume) {
         this.resume = resume;
+    }
+
+    public String getCoverLetter() {
+        return coverLetter;
+    }
+
+    public void setCoverLetter(String coverLetter) {
+        this.coverLetter = coverLetter;
     }
 }
