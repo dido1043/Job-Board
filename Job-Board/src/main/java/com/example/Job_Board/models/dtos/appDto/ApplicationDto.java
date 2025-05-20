@@ -6,6 +6,7 @@ public class ApplicationDto {
     private Long jobSeekerId;
     private Long jobPostId;
     private Long resumeId;
+    private String coverLetter;
     public Long getId() {
         return id;
     }
@@ -36,5 +37,13 @@ public class ApplicationDto {
 
     public void setResumeId(Long resumeId) {
         this.resumeId = resumeId;
+    }
+
+    public String getCoverLetter() {
+        return coverLetter;
+    }
+
+    public void setCoverLetter(String coverLetter) {
+        this.coverLetter = coverLetter;
     }
 }
