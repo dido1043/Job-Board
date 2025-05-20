@@ -78,6 +78,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         applicationDto.setJobPostId(application.getJobPost().getId());
         applicationDto.setJobSeekerId(application.getJobSeeker().getId());
         applicationDto.setResumeId(application.getResume().getId());
+        applicationDto.setCoverLetter(application.getCoverLetter());
         return applicationDto;
     }
 
@@ -93,6 +94,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         application.setJobPost(jobPost);
         application.setJobSeeker(jobSeeker);
         application.setResume(resume);
+        application.setCoverLetter(applicationDto.getCoverLetter());
         return application;
     }
 }
