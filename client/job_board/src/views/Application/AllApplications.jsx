@@ -19,7 +19,7 @@ const AllApplications = ({ jobId }) => {
                 setApplications(response.data);
                 
                 // Fetch usernames for all applications
-                await getUsernames(response.data);
+               
                 const usernamesMap = {};
                 for (const application of response.data) {
                     try {
@@ -55,7 +55,7 @@ const AllApplications = ({ jobId }) => {
                         <li key={application.id} className="list-group-item mb-3 shadow-sm">
                             <p><strong>Applicant Name:</strong> {usernames[application.jobSeekerId]}</p>
                             <p><strong>Resume:</strong> {application.resumeId}</p>
-                            <p><strong>Status:</strong> {application.status}</p>
+                            <p><strong>Cover Letter:</strong> {application.coverLetter}</p>
                         </li>
                     ))}
                 </ul>
