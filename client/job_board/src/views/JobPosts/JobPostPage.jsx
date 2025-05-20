@@ -81,7 +81,7 @@ const JobPostPage = () => {
   }
 
   const redirectToPostResume = () => {
-    nav('/resume/post');
+    nav(`/applications/create/${jobPost.id}`);
   }
   return (
     <div>

@@ -1,19 +1,19 @@
-import React, { use, useState,  useEffect } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import InputField from '../../components/shared/InputField';
 import BaseButton from '../../components/shared/BaseButton';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const PostResume = () => {
+const PostResume = ({ onResumePosted, onUploadStart  }) => {
 
   const [fileData, setFileData] = useState({
     jobSeekerId: Number(localStorage.getItem('userId')),
     filePath: "",
   });
-
+  const [resumeId, setResumeId] = useState(null);
   const nav = useNavigate();
 
- 
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -26,7 +26,9 @@ const PostResume = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // ✅ Prevent page refresh
+    if (onUploadStart) onUploadStart();
     try {
 
       console.log(fileData);
@@ -37,31 +39,23 @@ const PostResume = () => {
           'Accept': '*/*'
         }
       });
+      const returnedResumeId = response.data.id; // Adjust based on backend shape
+      setResumeId(returnedResumeId);
+      if (onResumePosted) {
+        onResumePosted(returnedResumeId); // callback to parent
+      }
       console.log(response.data);
-      nav('/');
+      //nav('/');
     } catch (error) {
       console.error('Error posting resume:', error);
     }
 
   }
 
-  const editResume = async (resumeId) => {
-    try {
-      const response = await axios.delete(`http://localhost:8080/resume/edit/${resumeId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': '*/*'
-        }
-      });
-
-    } catch (error) {
-      console.log('Error editing resume:', error);
-    }
-  }
 
   return (
     <div className='container mt-5 mb-5'>
-      <h2 className='text-center mt-4 mb-5'>Upload CV</h2>  {/* <input className="form-control form-control-lg" id="formFileLg" type="file" onChange={handleFileChange} /> */}
+      {/* <h2 className='text-center mt-4 mb-5'>Upload CV</h2>  <input className="form-control form-control-lg" id="formFileLg" type="file" onChange={handleFileChange} /> */}
       <InputField id="formFileLg" type="file" onChange={handleFileChange} />
       <div className="d-flex justify-content-center mt-4">
         <BaseButton text="Post Resume" onClick={handleSubmit} className="btn btn-primary" />
