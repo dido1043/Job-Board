@@ -3,17 +3,19 @@ services:
     name: job-board-api
     env: docker
     dockerfilePath: Job-Board/Dockerfile
-    rootDir: .
+    rootDir: .   # Assuming render.yaml is in root of repo
+    plan: free
+    autoDeploy: true
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: MYSQLHOST
         value: mysql.railway.internal
+      - key: MYSQLPORT
+        value: 3306
+      - key: MYSQLDATABASE
+        value: job_board_app_db
       - key: MYSQLUSER
         value: root
       - key: MYSQLPASSWORD
         value: GIUthrIHTOzPmWibbNRHKHmdGkPAsrTf
-      - key: MYSQLDATABASE
-        value: job_board_app_db
-      - key: MYSQLPORT
-        value: 3306
