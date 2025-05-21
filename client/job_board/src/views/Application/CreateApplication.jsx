@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import PostResume from '../Resume/PostResume';
 import BaseButton from '../../components/shared/BaseButton';
 
@@ -15,7 +16,7 @@ const CreateApplication = () => {
     coverLetter: '',
     resumeId: 0,
   });
-
+ 
   const [isResumeUploading, setIsResumeUploading] = useState(false);
 
   const handleCoverLetterChange = (e) => {
@@ -45,7 +46,7 @@ const CreateApplication = () => {
         },
       });
       console.log('Application submitted:', response.data);
-      navigate('/applications');
+      navigate('/');
     } catch (err) {
       console.error('Failed to submit application:', err);
       setError({ message: 'Failed to submit application. Please try again.' });

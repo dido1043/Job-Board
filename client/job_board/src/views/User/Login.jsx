@@ -54,7 +54,7 @@ const Login = () => {
                     'Accept': '*/*'
                 }
             });
-            localStorage.setItem('userRole', response.data); 
+            localStorage.setItem('userRole', response.data);
             console.log(response.data); // Log the user role
         } catch (err) {
             setError({
@@ -73,7 +73,7 @@ const Login = () => {
                 }
             });
             localStorage.setItem('username', response.data);
-        }catch (err) {
+        } catch (err) {
             setError({
                 message: 'Error fetching username'
             });
@@ -92,11 +92,11 @@ const Login = () => {
                 }
             });
             if (response.status === 200) {
-
+                const expirationTime = new Date().getTime() + 200 * 2000
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('tokenExpiration', response.data.expiresIn);
+                localStorage.setItem('tokenExpiration',  expirationTime);
                 localStorage.setItem('userEmail', formData.email);
-                
+
                 const userId = await getUserId(formData.email);
 
                 if (userId) {
