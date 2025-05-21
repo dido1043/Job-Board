@@ -2,10 +2,10 @@ services:
   - type: web
     name: job-board-api
     env: docker
+    rootDir: Job-Board
     dockerfilePath: Job-Board/Dockerfile
-    rootDir: .   # Assuming render.yaml is in root of repo
-    plan: free
     autoDeploy: true
+    plan: free
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
