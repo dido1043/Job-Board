@@ -77,7 +77,7 @@ const AllApplications = ({ jobId }) => {
                     {applications.map((application) => (
                         <li key={application.id} className="list-group-item mb-3 shadow-sm">
                             <p><strong>Applicant Name:</strong> {usernames[application.jobSeekerId]}</p>
-                            <p><strong>Resume:</strong>  <BaseButton onClick={() => downloadResume(resumes[application.resumeId])} text="View CV" /></p>
+                            <p><strong>Resume:</strong><BaseButton onClick={() => downloadResume(resumes[application.resumeId])} text="View CV" /></p>
                             <p><strong>Cover Letter:</strong> {application.coverLetter}</p>
                         </li>
                     ))}
