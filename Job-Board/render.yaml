@@ -3,9 +3,7 @@ services:
     name: job-board-api
     env: docker
     dockerfilePath: Job-Board/Dockerfile
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/Job-Board-0.0.1-SNAPSHOT.jar
-    rootDir: Job-Board
+    rootDir: .
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
