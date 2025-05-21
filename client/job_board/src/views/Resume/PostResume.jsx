@@ -27,7 +27,7 @@ const PostResume = ({ onResumePosted, onUploadStart  }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ✅ Prevent page refresh
+    e.preventDefault(); 
     if (onUploadStart) onUploadStart();
     try {
 
