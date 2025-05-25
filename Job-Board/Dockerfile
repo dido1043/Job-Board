@@ -1,17 +1,9 @@
-# Use a base image with JDK 17
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17-jdk-alpine
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven
-
-# Set working directory
 WORKDIR /app
 
-# Copy project files into container
-COPY . .
+COPY target/Job-Board-0.0.1-SNAPSHOT.jar app.jar
 
-# Build the Spring Boot app (skip tests to speed up build)
-RUN mvn clean package -DskipTests
+EXPOSE 8080
 
-# Run the JAR
-CMD ["java", "-jar", "target/Job-Board-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
