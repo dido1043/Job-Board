@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const AllJobPosts = () => {
     const [jobs, setJobs] = useState([]);
@@ -13,7 +13,7 @@ const AllJobPosts = () => {
 
         const showJobs = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/post/all`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/post/all`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
@@ -31,20 +31,20 @@ const AllJobPosts = () => {
         showJobs()
     }, [])
     const filterJobsBySeniority = async (seniority) => {
-       try {
-            const response = await axios.get(`http://localhost:8080/post/filter/${seniority}`, {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/post/filter/${seniority}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
             });
             setJobs(response.data);
-        console.log(response.data);
-       } catch (error) {
-        setError({
-            message: 'Error filtering jobs'
-        });
-       }
+            console.log(response.data);
+        } catch (error) {
+            setError({
+                message: 'Error filtering jobs'
+            });
+        }
     }
     const resetFilter = async () => {
         window.location.reload();
@@ -52,13 +52,15 @@ const AllJobPosts = () => {
     const redirectToCurrentJob = (jobId) => {
         nav(`/job/${jobId}`);
     };
-
+    const logSmthing = () => {
+        console.log(`${process.env.REACT_APP_API_KEY}`);
+    }
 
     return (
         <div className="container my-5">
             <h1 className="text-center display-4"> 💸All Job Posts💸 </h1>
             <p className="text-center lead">Find your dream job here and take the next step in your career!</p>
-
+           
             <div className="text-center my-4">
                 <h4 className="mb-3">Filter by Seniority</h4>
                 <div className="btn-group" role="group" aria-label="Seniority Filter">

@@ -20,7 +20,7 @@ const JobPostPage = () => {
   const nav = useNavigate();
   const getRecruiter = async (recruiterId) => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/get-username/${recruiterId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/get-username/${recruiterId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -39,7 +39,7 @@ const JobPostPage = () => {
 
     const getCurrentJobPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/post/get/${id}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/post/get/${id}`, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*'
@@ -64,7 +64,7 @@ const JobPostPage = () => {
 
   const deleteJobPost = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8080/post/delete/${jobPost.id}`, {
+      const response = await axios.delete(`${process.env.REACT_APP_API_KEY}/post/delete/${jobPost.id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'

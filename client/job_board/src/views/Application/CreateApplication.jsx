@@ -39,7 +39,7 @@ const CreateApplication = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/application/add', application, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/application/add`, application, {
         headers: {
           'Content-Type': 'application/json',
             'Accept': '*/*',

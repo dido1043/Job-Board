@@ -35,7 +35,7 @@ const UserPage = () => {
   const addSkillsToUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/user/add-skills/${userId}`, skills, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/user/add-skills/${userId}`, skills, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -56,7 +56,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUserSkills = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/user/show-skills/${userId}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/show-skills/${userId}`, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*'
@@ -79,7 +79,7 @@ const UserPage = () => {
   const addSeniorityToUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/user/set-seniority/${userId}`, { seniority }, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/user/set-seniority/${userId}`, { seniority }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -103,7 +103,7 @@ const UserPage = () => {
   const makeAdmin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/user/make-admin/${candidateForAdmin}`, null, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/user/make-admin/${candidateForAdmin}`, null, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -125,7 +125,7 @@ const UserPage = () => {
   //Become recruiter
   const becomeRecruiter = async (e) => {
     try {
-      const response = await axios.post(`http://localhost:8080/user/become-recruiter/${userId}`, null, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/user/become-recruiter/${userId}`, null, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'
@@ -144,7 +144,7 @@ const UserPage = () => {
   useEffect(() => {
     const getUserSeniority = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/user/get-seniority/${userId}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/get-seniority/${userId}`, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*'
@@ -166,7 +166,7 @@ const UserPage = () => {
   //Delete user
   const deleteUser = async (e) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/user/delete/${userId}`, null, {
+      const response = await axios.delete(`${process.env.REACT_APP_API_KEY}/user/delete/${userId}`, null, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'

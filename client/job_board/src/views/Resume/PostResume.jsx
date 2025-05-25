@@ -33,7 +33,7 @@ const PostResume = ({ onResumePosted, onUploadStart  }) => {
 
       console.log(fileData);
 
-      const response = await axios.post(`http://localhost:8080/resume/add`, fileData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_KEY}/resume/add`, fileData, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*'

@@ -30,7 +30,7 @@ const Login = () => {
     //Get user id
     const getUserId = async (email) => {
         try {
-            const response = await axios.get(`http://localhost:8080/user/find/${email}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/find/${email}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -48,7 +48,7 @@ const Login = () => {
     //Get user role
     const getUserRole = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/user/get-role/${id}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/get-role/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -66,7 +66,7 @@ const Login = () => {
     //Get usernamre
     const getUsername = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/user/get-username/${id}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_KEY}/user/get-username/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
@@ -85,7 +85,7 @@ const Login = () => {
         e.preventDefault();
         const formErrors = validateForm();
         try {
-            const response = await axios.post(`http://localhost:8080/auth/login`, formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_KEY}/auth/login`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'

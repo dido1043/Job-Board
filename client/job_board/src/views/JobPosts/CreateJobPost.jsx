@@ -53,7 +53,7 @@ const CreateJobPost = ({isEditable, jpData}) => {
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:8080/post/create`, jobPost, {
+            const response = await axios.post(`${process.env.REACT_APP_API_KEY}/post/create`, jobPost, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*',
@@ -78,7 +78,7 @@ const CreateJobPost = ({isEditable, jpData}) => {
             return;
         }
         try {
-          const response = await axios.put(`http://localhost:8080/post/edit/${jpData.id}`, jobPost, {
+          const response = await axios.put(`${process.env.REACT_APP_API_KEY}/post/edit/${jpData.id}`, jobPost, {
             headers: {  
                 'Content-Type': 'application/json',
                 'Accept': '*/*',

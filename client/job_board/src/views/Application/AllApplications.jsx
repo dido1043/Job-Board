@@ -13,7 +13,7 @@ const AllApplications = ({ jobId }) => {
     useEffect(() => {
         const getApplications = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/application/job/${jobId}`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/application/job/${jobId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
@@ -25,7 +25,7 @@ const AllApplications = ({ jobId }) => {
                 const usernamesMap = {};
                 for (const application of response.data) {
                     try {
-                        const userData = await axios.get(`http://localhost:8080/user/get-username/${application.jobSeekerId}`,
+                        const userData = await axios.get(`${process.env.REACT_APP_API_KEY}/user/get-username/${application.jobSeekerId}`,
                             {
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const AllApplications = ({ jobId }) => {
                 const resumesMap = {};
                 for(const application of response.data){
                     try{
-                        const resumeData = await axios.get(`http://localhost:8080/resume/get/${application.resumeId}`,
+                        const resumeData = await axios.get(`${process.env.REACT_APP_API_KEY}/resume/get/${application.resumeId}`,
                             {
                                 headers: {
                                     'Content-Type': 'application/json',

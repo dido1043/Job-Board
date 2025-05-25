@@ -52,7 +52,7 @@ const Register = () => {
             setErrors(formErrors);
             return;
         }
-        axios.post(`http://localhost:8080/auth/register`, formData, {
+        axios.post(`${process.env.REACT_APP_API_KEY}/auth/register`, formData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': '*/*'

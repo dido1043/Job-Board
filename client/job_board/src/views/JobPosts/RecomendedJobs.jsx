@@ -14,7 +14,7 @@ const RecommendedJobs = () => {
     useEffect(() => {
         const getRecommendedJobs = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/post/recommended/${userId}`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/post/recommended/${userId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'

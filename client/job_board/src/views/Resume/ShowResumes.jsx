@@ -9,7 +9,7 @@ const ShowResumes = () => {
     useEffect(() => {
         const getResumes = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/resume/get-by-userId/${userId}`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_KEY}/resume/get-by-userId/${userId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': '*/*'
@@ -32,7 +32,7 @@ const ShowResumes = () => {
 
     const deleteResume = async (resumeId) => {
         try {
-            const response = await axios.delete(`http://localhost:8080/resume/delete/${resumeId}`, {
+            const response = await axios.delete(`${process.env.REACT_APP_API_KEY}/resume/delete/${resumeId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': '*/*'
