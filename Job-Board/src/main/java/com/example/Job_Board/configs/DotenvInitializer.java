@@ -22,4 +22,11 @@ public class DotenvInitializer implements ApplicationContextInitializer<Configur
         ConfigurableEnvironment env = applicationContext.getEnvironment();
         env.getPropertySources().addFirst(new MapPropertySource("dotenv", properties));
     }
+
+    private void setEnv(Map<String, Object> props, String springKey, Dotenv dotenv, String envKey) {
+        String value = dotenv.get(envKey);
+        if (value != null) {
+            props.put(springKey, value);
+        }
+    }
 }

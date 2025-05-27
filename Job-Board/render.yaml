@@ -1,21 +1,13 @@
 services:
   - type: web
-    name: job-board-api
-    env: docker
-    rootDir: Job-Board
-    dockerfilePath: Job-Board/Dockerfile
-    autoDeploy: true
-    plan: free
+    name: Job-Board
+    runtime: java
+    buildCommand: ./mvnw clean install
+    startCommand: ./mvnw spring-boot:run
     envVars:
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: MYSQLHOST
-        value: mysql.railway.internal
-      - key: MYSQLPORT
-        value: 3306
-      - key: MYSQLDATABASE
-        value: job_board_app_db
-      - key: MYSQLUSER
+      - key: DATASOURCE_URL
+        value: jdbc:mysql://127.0.0.1:3307/job_board_app_db?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+      - key: DATASOURCE_USERNAME
         value: root
-      - key: MYSQLPASSWORD
-        value: GIUthrIHTOzPmWibbNRHKHmdGkPAsrTf
+      - key: FRONTEND_URL
+        value: http://localhost:3000
