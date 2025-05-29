@@ -52,8 +52,8 @@ const AllJobPosts = () => {
     const redirectToCurrentJob = (jobId) => {
         nav(`/job/${jobId}`);
     };
-    const logSmthing = () => {
-        console.log(`${process.env.REACT_APP_API_KEY}`);
+    const redirectToLoginPage = () => {
+        nav('/login');
     }
 
     return (
@@ -78,7 +78,7 @@ const AllJobPosts = () => {
                         jobs.map((job) => (
                             <div className="col-md-6 col-lg-4" key={job.id}>
                                 <div className="card mb-4 shadow-sm"
-                                    onClick={redirectToCurrentJob.bind(null, job.id)}
+                                    onClick={localStorage.getItem("token") != null ? redirectToCurrentJob.bind(null, job.id) : redirectToLoginPage}
                                     style={{ cursor: "pointer", borderRadius: "10px" }}>
                                     <div className="card-body">
                                         <h5 className="card-title text-primary">{job.title}</h5>
