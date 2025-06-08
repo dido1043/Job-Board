@@ -17,6 +17,7 @@ public class DotenvInitializer implements ApplicationContextInitializer<Configur
         Map<String, Object> properties = new HashMap<>();
         properties.put("spring.datasource.url", dotenv.get("DATASOURCE_URL"));
         properties.put("spring.datasource.username", dotenv.get("DATASOURCE_USER"));
+        properties.put("spring.datasource.password", dotenv.get("DATASOURCE_PASSWORD"));
         properties.put("frontend.url", dotenv.get("FRONTEND_URL"));
 
         ConfigurableEnvironment env = applicationContext.getEnvironment();

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 987654321
+      MYSQL_DATABASE: job_board_app_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql   # ✅ Named volume for persistent DB storage
+
+volumes:
+  db_data:  # ✅ Defined named volume
