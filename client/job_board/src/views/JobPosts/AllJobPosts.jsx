@@ -62,21 +62,22 @@ const AllJobPosts = () => {
            
             <div className="text-center my-4">
                 <h4 className="mb-3">Filter by Seniority</h4>
-                <div className="btn-group" role="group" aria-label="Seniority Filter">
-                    <button type="button" className="btn btn-primary" onClick={() => filterJobsBySeniority("Junior")}>Junior</button>
-                    <button type="button" className="btn btn-secondary" onClick={() => filterJobsBySeniority("Mid")}>Mid</button>
-                    <button type="button" className="btn btn-success" onClick={() => filterJobsBySeniority("Senior")}>Senior</button>
+                <div className="col-md-8 mx-auto">
+                    <div className="btn-group w-100" role="group" aria-label="Seniority Filter">
+                        <button type="button" className="btn btn-primary" onClick={() => filterJobsBySeniority("Junior")}>Junior</button>
+                        <button type="button" className="btn btn-secondary" onClick={() => filterJobsBySeniority("Mid")}>Mid</button>
+                        <button type="button" className="btn btn-success" onClick={() => filterJobsBySeniority("Senior")}>Senior</button>
+                    </div>
+                    <button type="button" className="btn btn-danger mt-3 " onClick={() => resetFilter()}>Reset Filters</button>
                 </div>
-                <br />
-                <button type="button" className="btn btn-danger mt-3" onClick={() => resetFilter()}>Reset Filters</button>
             </div>
 
             <div className="container my-5">
-                <div className="row justify-content-center">
-                    {jobs.length > 0 ? (
-                        jobs.map((job) => (
-                            <div className="col-md-6 col-lg-4" key={job.id}>
-                                <div className="card mb-4 shadow-sm"
+                <div className="row">
+                    <div className="col-md-8 mx-auto">
+                        {jobs.length > 0 ? (
+                            jobs.map((job) => (
+                                <div className="card mb-4 shadow-sm" key={job.id}
                                     onClick={localStorage.getItem("token") != null ? redirectToCurrentJob.bind(null, job.id) : redirectToLoginPage}
                                     style={{ cursor: "pointer", borderRadius: "10px" }}>
                                     <div className="card-body">
@@ -84,13 +85,13 @@ const AllJobPosts = () => {
                                         <p className="card-text text-muted">📍 {job.location}</p>
                                     </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="text-center">
+                                <p className="text-muted">No job posts available. Please try again later.</p>
                             </div>
-                        ))
-                    ) : (
-                        <div className="text-center">
-                            <p className="text-muted">No job posts available. Please try again later.</p>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
