@@ -1,6 +1,6 @@
 JobBoard
 
-You can visit the demo here: https://job-board-self-ten.vercel.app
+You can visit my Job-Board application here: https://job-board-self-ten.vercel.app
 
 📌 Overview
 
