@@ -58,7 +58,6 @@ const Register = () => {
                 'Accept': '*/*'
             }
         }).then((response) => {
-            console.log(response.data);
             setRegister(true)
             setHandleSuccess({
                 status: 'Success',

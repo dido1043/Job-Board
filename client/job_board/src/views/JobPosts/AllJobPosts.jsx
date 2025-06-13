@@ -39,7 +39,6 @@ const AllJobPosts = () => {
                 }
             });
             setJobs(response.data);
-            console.log(response.data);
         } catch (error) {
             setError({
                 message: 'Error filtering jobs'

@@ -30,9 +30,6 @@ const PostResume = ({ onResumePosted, onUploadStart  }) => {
     e.preventDefault(); 
     if (onUploadStart) onUploadStart();
     try {
-
-      console.log(fileData);
-
       const response = await axios.post(`${process.env.REACT_APP_API_KEY}/resume/add`, fileData, {
         headers: {
           'Content-Type': 'application/json',
@@ -44,8 +41,7 @@ const PostResume = ({ onResumePosted, onUploadStart  }) => {
       if (onResumePosted) {
         onResumePosted(returnedResumeId); // callback to parent
       }
-      console.log(response.data);
-      //nav('/');
+     
     } catch (error) {
       console.error('Error posting resume:', error);
     }

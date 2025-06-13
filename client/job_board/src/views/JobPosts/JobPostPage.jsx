@@ -35,8 +35,6 @@ const JobPostPage = () => {
   }
   //Fetch the job post details using the id
   useEffect(() => {
-    console.log(id);
-
     const getCurrentJobPost = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_KEY}/post/get/${id}`, {

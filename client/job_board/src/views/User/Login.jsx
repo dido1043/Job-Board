@@ -55,7 +55,6 @@ const Login = () => {
                 }
             });
             localStorage.setItem('userRole', response.data);
-            console.log(response.data); // Log the user role
         } catch (err) {
             setError({
                 message: 'Error fetching user role'
@@ -100,7 +99,6 @@ const Login = () => {
                 const userId = await getUserId(formData.email);
 
                 if (userId) {
-                    console.log("userId before calling getUserRole:", userId);
                     await getUserRole(userId);
                     await getUsername(userId);
                     navigate(`/user/${localStorage.getItem('userId')}`);

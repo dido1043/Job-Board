@@ -45,7 +45,6 @@ const CreateApplication = () => {
             'Accept': '*/*',
         },
       });
-      console.log('Application submitted:', response.data);
       navigate('/');
     } catch (err) {
       console.error('Failed to submit application:', err);

@@ -59,9 +59,9 @@ const CreateJobPost = ({isEditable, jpData}) => {
                     'Accept': '*/*',
                 }
             });
-            console.log(response.data);
+            
             if (response.status === 201) {
-                console.log("Job post created successfully!");
+                
                 nav('/jobs/all');
             }
         } catch (err) {

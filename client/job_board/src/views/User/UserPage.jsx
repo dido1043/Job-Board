@@ -43,8 +43,6 @@ const UserPage = () => {
       });
       setAllSkills(response.data);
       setSkills([]);
-      console.log(allSkills);
-      //console.log(response.data);
     } catch (error) {
       setError({
         message: 'Error adding skills to user'
@@ -63,7 +61,6 @@ const UserPage = () => {
           }
         });
         setAllSkills(response.data);
-        console.log(allSkills);
       } catch (error) {
         setError({
           message: 'Error fetching user skills'
@@ -86,7 +83,6 @@ const UserPage = () => {
         }
       });
       isSetSeniority(true);
-      console.log(response.data);
       // if (response.data !== seniority) {
 
       //   //setSeniority(response.data);
@@ -109,7 +105,6 @@ const UserPage = () => {
           'Accept': '*/*'
         }
       });
-      console.log(response.data);
       localStorage.setItem('userRole', response.data);
       setUserRole(response.data);
     } catch (error) {
@@ -150,8 +145,6 @@ const UserPage = () => {
             'Accept': '*/*'
           }
         });
-        console.log(response.data);
-
         setSeniority(response.data);
       } catch (error) {
         setError({
@@ -196,7 +189,7 @@ const UserPage = () => {
     // setToken(null);
     navigate('/');
     window.location.reload();
-    console.log("Logout function called");
+   
   }
 
   const redirectToMyFiles = () => {
