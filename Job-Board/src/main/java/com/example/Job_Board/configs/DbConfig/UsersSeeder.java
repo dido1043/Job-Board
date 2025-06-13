@@ -21,10 +21,10 @@ public class UsersSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        if (userRepository.count() > 0) {
-//            System.out.println("Users already seeded. Skipping...");
-//            return;
-//        }
+        if (userRepository.count() > 0) {
+            System.out.println("Users already seeded. Skipping...");
+            return;
+        }
         User adminUser = new User();
         adminUser.setUsername("DeyanAdmin");
         adminUser.setEmail("deyan.admin05@gmail.com");
